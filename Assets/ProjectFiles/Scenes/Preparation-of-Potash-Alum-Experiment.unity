@@ -606,6 +606,37 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000002552617, y: -0.0000009541072, z: 0.0005965562}
     m_Extent: {x: 0.00004444324, y: 0.000044443263, z: 0.0006122252}
   m_DirtyAABB: 0
+--- !u!1 &110874371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 110874372}
+  m_Layer: 0
+  m_Name: TripodStand Cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &110874372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110874371}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.977889, z: 0.20912482, w: 0}
+  m_LocalPosition: {x: -0.13, y: 1.81, z: 4.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 980546466}
+  m_LocalEulerAnglesHint: {x: 24.142, y: -180, z: 0}
 --- !u!1 &122494830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1764,7 @@ Transform:
   m_GameObject: {fileID: 195574944}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.53664947, y: 1.0412167, z: 0.5473018}
+  m_LocalPosition: {x: 0.754, y: 1.0412167, z: 0.5473018}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3205,6 +3236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 335968591}
+  - component: {fileID: 335968592}
   m_Layer: 0
   m_Name: Crystallising dish
   m_TagString: Untagged
@@ -3228,6 +3260,27 @@ Transform:
   - {fileID: 1145148008}
   m_Father: {fileID: 446956086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &335968592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335968590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0014584878, y: 0.0025898917, z: 0.0010088554}
+  m_Center: {x: -0.000011708438, y: -0.000012066066, z: 0.00041295684}
 --- !u!1 &343134092
 GameObject:
   m_ObjectHideFlags: 0
@@ -6184,7 +6237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &549443001
 Transform:
   m_ObjectHideFlags: 0
@@ -8840,11 +8893,43 @@ MonoBehaviour:
     cameraPoint: {fileID: 2030442106}
     title: 
     description: 
+  - itemName: Tripod Stand
+    clickableCollider: {fileID: 2063031749}
+    allowedPageIndex: 2
+    cameraPoint: {fileID: 110874372}
+    title: 
+    description: 
+  - itemName: Crystallising Dish
+    clickableCollider: {fileID: 335968592}
+    allowedPageIndex: 2
+    cameraPoint: {fileID: 1727167695}
+    title: 
+    description: 
+  - itemName: Spatula
+    clickableCollider: {fileID: 1548323831}
+    allowedPageIndex: 2
+    cameraPoint: {fileID: 1123260511}
+    title: 
+    description: 
+  - itemName: Glass Rod
+    clickableCollider: {fileID: 1827177555}
+    allowedPageIndex: 2
+    cameraPoint: {fileID: 2086364854}
+    title: 
+    description: 
+  - itemName: Wire Gauze
+    clickableCollider: {fileID: 1234105685}
+    allowedPageIndex: 2
+    cameraPoint: {fileID: 1847922315}
+    title: 
+    description: 
   wrongTargets:
   - wrongCollider: {fileID: 1007605921}
     allowedPageIndex: 1
   - wrongCollider: {fileID: 1303545504}
     allowedPageIndex: 1
+  - wrongCollider: {fileID: 963212487}
+    allowedPageIndex: 2
   audioSource: {fileID: 0}
   correctSound: {fileID: 0}
   wrongSound: {fileID: 0}
@@ -11653,6 +11738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963212486}
+  - component: {fileID: 963212487}
   m_Layer: 0
   m_Name: test tube holder
   m_TagString: Untagged
@@ -11676,6 +11762,27 @@ Transform:
   - {fileID: 2033203046}
   m_Father: {fileID: 446956086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &963212487
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963212485}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0017710925, y: 0.005022099, z: 0.0011385381}
+  m_Center: {x: -0.000037405563, y: 0.00020023862, z: 0.0003356714}
 --- !u!1 &970679540
 GameObject:
   m_ObjectHideFlags: 0
@@ -11892,6 +11999,11 @@ Transform:
   - {fileID: 223615378}
   - {fileID: 1856936907}
   - {fileID: 2030442106}
+  - {fileID: 110874372}
+  - {fileID: 1727167695}
+  - {fileID: 1123260511}
+  - {fileID: 2086364854}
+  - {fileID: 1847922315}
   m_Father: {fileID: 209284135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &982459731
@@ -13942,6 +14054,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119592933}
   m_Mesh: {fileID: 289301614986012343, guid: 3c0cc8fdc7313174893c7a7f52425b57, type: 3}
+--- !u!1 &1123260510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123260511}
+  m_Layer: 0
+  m_Name: Spatula Cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123260511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123260510}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9917258, z: 0.12837458, w: 0}
+  m_LocalPosition: {x: -0.986, y: 1.201, z: 3.711}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 980546466}
+  m_LocalEulerAnglesHint: {x: 14.751, y: -180, z: 0}
 --- !u!1 &1125762394
 GameObject:
   m_ObjectHideFlags: 0
@@ -14499,8 +14642,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147446641}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.12919995, y: -0.023804734, z: 0.0030995854, w: -0.991328}
-  m_LocalPosition: {x: 18.91, y: 4.15, z: -82.57}
+  m_LocalRotation: {x: 0, y: -0.9828632, z: 0.18433662, w: 0}
+  m_LocalPosition: {x: -0.21930002, y: 2.13, z: 2.95643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15649,6 +15792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1234105684}
+  - component: {fileID: 1234105685}
   m_Layer: 0
   m_Name: wire_gauze
   m_TagString: Untagged
@@ -15665,13 +15809,34 @@ Transform:
   m_GameObject: {fileID: 1234105683}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.211, y: 1.007, z: -0.434}
+  m_LocalPosition: {x: 0.109, y: 1.007, z: -0.434}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1545868907}
   m_Father: {fileID: 446956086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1234105685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234105683}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0045833085, y: 0.006414906, z: 0.0022077144}
+  m_Center: {x: -0.00005997881, y: 0.0002607134, z: 0.00073844}
 --- !u!1 &1238883912
 GameObject:
   m_ObjectHideFlags: 0
@@ -20411,6 +20576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1548323830}
+  - component: {fileID: 1548323831}
   m_Layer: 0
   m_Name: spatula main
   m_TagString: Untagged
@@ -20427,13 +20593,34 @@ Transform:
   m_GameObject: {fileID: 1548323829}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.971, y: 1.0220469, z: 0.271}
+  m_LocalPosition: {x: -1.226, y: 1.022, z: -0.251}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1211633635}
   m_Father: {fileID: 446956086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1548323831
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548323829}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0010494081, y: 0.0036985492, z: 0.000870471}
+  m_Center: {x: -0.000044269746, y: 0.00007657938, z: 0.00022263631}
 --- !u!1 &1550843710
 GameObject:
   m_ObjectHideFlags: 0
@@ -21331,7 +21518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1621164996
 Transform:
   m_ObjectHideFlags: 0
@@ -21464,7 +21651,7 @@ Transform:
   m_GameObject: {fileID: 1627350846}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.041, y: 1.0191939, z: 0.467}
+  m_LocalPosition: {x: 1.207, y: 1.0191939, z: 0.467}
   m_LocalScale: {x: 99.99999, y: 99.99999, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23188,6 +23375,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724670849}
   m_Mesh: {fileID: 8673430036946113207, guid: 3c0cc8fdc7313174893c7a7f52425b57, type: 3}
+--- !u!1 &1727167694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727167695}
+  m_Layer: 0
+  m_Name: CrystallisingDish Cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1727167695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727167694}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.977889, z: 0.20912482, w: 0}
+  m_LocalPosition: {x: 0.364, y: 1.498, z: 4.453}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 980546466}
+  m_LocalEulerAnglesHint: {x: 24.142, y: -180, z: 0}
 --- !u!1 &1736897548
 GameObject:
   m_ObjectHideFlags: 0
@@ -24351,6 +24569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827177554}
+  - component: {fileID: 1827177555}
   m_Layer: 0
   m_Name: glass rod main
   m_TagString: Untagged
@@ -24367,13 +24586,34 @@ Transform:
   m_GameObject: {fileID: 1827177553}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.608, y: 1.022, z: -0.253}
+  m_LocalPosition: {x: 0.478, y: 1.033, z: -0.386}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1893567167}
   m_Father: {fileID: 446956086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1827177555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827177553}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0017270118, y: 0.005564009, z: 0.0015305278}
+  m_Center: {x: -0.000020972191, y: 0.0002811569, z: 0.0002315136}
 --- !u!1 &1836544180
 GameObject:
   m_ObjectHideFlags: 0
@@ -24498,6 +24738,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841053033}
   m_Mesh: {fileID: 8044662884106017354, guid: 3c0cc8fdc7313174893c7a7f52425b57, type: 3}
+--- !u!1 &1847922314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1847922315}
+  m_Layer: 0
+  m_Name: WireGauze Cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1847922315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847922314}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9917258, z: 0.12837458, w: 0}
+  m_LocalPosition: {x: 0.342, y: 1.322, z: 3.716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 980546466}
+  m_LocalEulerAnglesHint: {x: 14.751, y: -180, z: 0}
 --- !u!1 &1855674664
 GameObject:
   m_ObjectHideFlags: 0
@@ -24524,7 +24795,7 @@ Transform:
   m_GameObject: {fileID: 1855674664}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.51, y: 1.014, z: 0.434}
+  m_LocalPosition: {x: 0.72735053, y: 1.014, z: 0.434}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24578,7 +24849,7 @@ Transform:
   m_GameObject: {fileID: 1856936906}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9988399, z: 0.04815451, w: 0}
-  m_LocalPosition: {x: 0.803, y: 1.363, z: 5.045}
+  m_LocalPosition: {x: 0.865, y: 1.37, z: 5.044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26069,7 +26340,7 @@ Transform:
   m_GameObject: {fileID: 2030442105}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9988399, z: 0.04815451, w: 0}
-  m_LocalPosition: {x: 1.271, y: 1.381, z: 5.226}
+  m_LocalPosition: {x: 1.318, y: 1.359, z: 5.165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26272,6 +26543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2063031748}
+  - component: {fileID: 2063031749}
   m_Layer: 0
   m_Name: Tripod_Stand.001
   m_TagString: Untagged
@@ -26288,13 +26560,34 @@ Transform:
   m_GameObject: {fileID: 2063031747}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.332, y: 1.0158372, z: -0.02}
+  m_LocalPosition: {x: -0.454, y: 1.0158372, z: -0.293}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1202853974}
   m_Father: {fileID: 446956086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2063031749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063031747}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0047051273, y: 0.005127537, z: 0.0038254918}
+  m_Center: {x: 0.0005190509, y: 0.000008741915, z: 0.0017303649}
 --- !u!1 &2068680459
 GameObject:
   m_ObjectHideFlags: 0
@@ -26417,6 +26710,37 @@ Transform:
   - {fileID: 1285221625}
   m_Father: {fileID: 1004081944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2086364853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2086364854}
+  m_Layer: 0
+  m_Name: GlassRod Cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2086364854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086364853}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9917258, z: 0.12837458, w: 0}
+  m_LocalPosition: {x: 0.675, y: 1.26, z: 3.736}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 980546466}
+  m_LocalEulerAnglesHint: {x: 14.751, y: -180, z: 0}
 --- !u!1 &2096868169
 GameObject:
   m_ObjectHideFlags: 0
