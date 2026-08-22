@@ -35224,7 +35224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3bfaf8744c5b84b9d31dcc0e98ab77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PageMeshHighlightManager
-  highlightMaterial: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: 0d384473d36fdd947a71ee1863bb6390, type: 2}
   pageConfigs:
   - pageIndex: 3
     meshEntries:
