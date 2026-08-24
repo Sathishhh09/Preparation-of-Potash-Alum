@@ -21,8 +21,7 @@ public class PersistentAssetController : MonoBehaviour
     }
 
     [SerializeField]
-    private List<PageTransformData> pageTransforms =
-        new List<PageTransformData>();
+    private List<PageTransformData> pageTransforms = new List<PageTransformData>();
 
     private SortedDictionary<int, PageTransformData> lookup;
 
@@ -30,19 +29,7 @@ public class PersistentAssetController : MonoBehaviour
     {
         lookup = new SortedDictionary<int, PageTransformData>();
 
-        // Base state (page 0)
-        PageTransformData baseData = new PageTransformData
-        {
-            pageIndex = 0,
-            localPosition = transform.localPosition,
-            localEulerRotation = transform.localEulerAngles,
-            localScale = transform.localScale,
-            ignoreFirstEnable = false,
-            hasIgnoredOnce = false
-        };
-
-        lookup[0] = baseData;
-
+        // Build lookup purely from configured inspector data (no forced base state)
         foreach (var data in pageTransforms)
         {
             if (data == null)
@@ -60,8 +47,8 @@ public class PersistentAssetController : MonoBehaviour
     {
         PageNavigationController.OnPageChanged += OnPageChanged;
 
-        // Immediate sync
-        ApplyForPage(PageNavigationController.CurrentIndex, true);
+        // Immediate sync to active page
+        ApplyForPage(PageNavigationController.CurrentIndex);
     }
 
     private void OnDisable()
@@ -71,16 +58,17 @@ public class PersistentAssetController : MonoBehaviour
 
     private void OnPageChanged(int pageIndex)
     {
-        ApplyForPage(pageIndex, false);
+        ApplyForPage(pageIndex);
     }
 
-    private void ApplyForPage(int pageIndex, bool isInitialApply)
+    private void ApplyForPage(int pageIndex)
     {
         if (lookup == null || lookup.Count == 0)
             return;
 
         PageTransformData chosen = null;
 
+        // Selects the closest configured transform <= current page index
         foreach (var pair in lookup)
         {
             if (pair.Key > pageIndex)
@@ -89,10 +77,11 @@ public class PersistentAssetController : MonoBehaviour
             chosen = pair.Value;
         }
 
+        // If no configured transform matches or precedes this page index, leave object as-is
         if (chosen == null)
             return;
 
-        // 🔴 Core logic: skip once if flagged
+        // Skip applying once if flagged
         if (chosen.ignoreFirstEnable && !chosen.hasIgnoredOnce)
         {
             chosen.hasIgnoredOnce = true;
