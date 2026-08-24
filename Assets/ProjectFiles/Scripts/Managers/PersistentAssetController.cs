@@ -16,20 +16,25 @@ public class PersistentAssetController : MonoBehaviour
         [Header("Behavior")]
         public bool ignoreFirstEnable;
 
-        // Runtime flag (not exposed)
+        // Runtime flag
         [System.NonSerialized] public bool hasIgnoredOnce;
     }
 
     [SerializeField]
     private List<PageTransformData> pageTransforms = new List<PageTransformData>();
 
+    // Sorted by page index to handle ranges forward & backward
     private SortedDictionary<int, PageTransformData> lookup;
 
     private void Awake()
     {
+        InitializeLookup();
+    }
+
+    private void InitializeLookup()
+    {
         lookup = new SortedDictionary<int, PageTransformData>();
 
-        // Build lookup purely from configured inspector data (no forced base state)
         foreach (var data in pageTransforms)
         {
             if (data == null)
@@ -37,7 +42,7 @@ public class PersistentAssetController : MonoBehaviour
 
             if (!lookup.ContainsKey(data.pageIndex))
             {
-                data.hasIgnoredOnce = false; // reset runtime flag
+                data.hasIgnoredOnce = false;
                 lookup.Add(data.pageIndex, data);
             }
         }
@@ -46,8 +51,6 @@ public class PersistentAssetController : MonoBehaviour
     private void OnEnable()
     {
         PageNavigationController.OnPageChanged += OnPageChanged;
-
-        // Immediate sync to active page
         ApplyForPage(PageNavigationController.CurrentIndex);
     }
 
@@ -61,27 +64,32 @@ public class PersistentAssetController : MonoBehaviour
         ApplyForPage(pageIndex);
     }
 
-    private void ApplyForPage(int pageIndex)
+    public void ApplyForPage(int pageIndex)
     {
+        if (lookup == null || lookup.Count == 0)
+            InitializeLookup();
+
         if (lookup == null || lookup.Count == 0)
             return;
 
         PageTransformData chosen = null;
 
-        // Selects the closest configured transform <= current page index
+        // Finds the closest defined keyframe <= pageIndex (e.g. 0 applies to 0, 1, 2, 3)
         foreach (var pair in lookup)
         {
-            if (pair.Key > pageIndex)
+            if (pair.Key <= pageIndex)
+            {
+                chosen = pair.Value;
+            }
+            else
+            {
                 break;
-
-            chosen = pair.Value;
+            }
         }
 
-        // If no configured transform matches or precedes this page index, leave object as-is
         if (chosen == null)
             return;
 
-        // Skip applying once if flagged
         if (chosen.ignoreFirstEnable && !chosen.hasIgnoredOnce)
         {
             chosen.hasIgnoredOnce = true;
@@ -91,5 +99,34 @@ public class PersistentAssetController : MonoBehaviour
         transform.localPosition = chosen.localPosition;
         transform.localEulerAngles = chosen.localEulerRotation;
         transform.localScale = chosen.localScale;
+    }
+
+    /// <summary>
+    /// Overwrites the transform data for a specific page with new coordinates (called after snapping).
+    /// </summary>
+    public void UpdatePageTransform(int pageIndex, Vector3 newLocalPos, Vector3 newLocalRot, Vector3 newLocalScale)
+    {
+        if (lookup == null)
+            InitializeLookup();
+
+        if (lookup.TryGetValue(pageIndex, out PageTransformData existingData))
+        {
+            existingData.localPosition = newLocalPos;
+            existingData.localEulerRotation = newLocalRot;
+            existingData.localScale = newLocalScale;
+        }
+        else
+        {
+            PageTransformData newData = new PageTransformData
+            {
+                pageIndex = pageIndex,
+                localPosition = newLocalPos,
+                localEulerRotation = newLocalRot,
+                localScale = newLocalScale,
+                ignoreFirstEnable = false,
+                hasIgnoredOnce = true
+            };
+            lookup.Add(pageIndex, newData);
+        }
     }
 }

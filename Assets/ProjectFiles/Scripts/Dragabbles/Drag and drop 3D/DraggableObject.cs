@@ -15,18 +15,14 @@ public class DraggableObject : MonoBehaviour
         public bool restoreToSnapWhenConditionActive = true;
         public UnityEvent OnSnapCompleted;
 
-        // ✅ NEW FEATURE
         [Header("Display Options")]
         [Tooltip("If enabled, first time this index is reached, interaction will be ignored.")]
         public bool enableFirstIgnore = false;
 
         [HideInInspector] public bool hasVisitedOnce = false;
-
         [HideInInspector] public Collider highlightCollider;
 
-        // ===============================
-        // 🔍 Debugging Only – Do Not Modify
-        // ===============================
+        [Header("Debugging Only")]
         [Tooltip("True once snapping is completed. Dragging will be disabled.")]
         public bool snapped;
     }
@@ -53,6 +49,7 @@ public class DraggableObject : MonoBehaviour
     [SerializeField] private UnityEvent OnDragStart;
 
     private PageNavigationController pageNavigationController;
+    private PersistentAssetController persistentAssetController;
 
     private Camera mainCam;
     private Collider objectCollider;
@@ -69,21 +66,19 @@ public class DraggableObject : MonoBehaviour
     private Vector3 offset;
     private float objectScreenZ;
 
-    private Vector3 originalPosition;
-    private Quaternion originalRotation;
+    private Vector3 currentStartPos;
+    private Quaternion currentStartRot;
 
     void Awake()
     {
         pageNavigationController = FindFirstObjectByType<PageNavigationController>();
+        persistentAssetController = GetComponent<PersistentAssetController>();
 
         mainCam = Camera.main;
         if (mainCam == null)
             mainCam = FindFirstObjectByType<Camera>();
 
         objectCollider = GetComponent<Collider>();
-
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
 
         foreach (var element in elements)
         {
@@ -141,18 +136,14 @@ public class DraggableObject : MonoBehaviour
 
         var element = elements[index];
 
-        // ✅ NEW LOGIC: First-time ignore
         if (element.enableFirstIgnore && !element.hasVisitedOnce)
         {
             element.hasVisitedOnce = true;
-
             canDrag = false;
             interactionLocked = true;
-
             return;
         }
 
-        // mark visited
         element.hasVisitedOnce = true;
 
         if (element.snapped)
@@ -227,6 +218,9 @@ public class DraggableObject : MonoBehaviour
             if (hit.collider == objectCollider)
             {
                 isDragging = true;
+                currentStartPos = transform.position;
+                currentStartRot = transform.rotation;
+
                 OnDragStart?.Invoke();
 
                 if (animator != null && animator.enabled)
@@ -276,19 +270,7 @@ public class DraggableObject : MonoBehaviour
             {
                 if (!element.snapped)
                 {
-                    element.snapped = true;
-                    lastSnappedElementIndex = activeElementIndex;
-
-                    if (element.highlightObject != null)
-                        element.highlightObject.SetActive(false);
-
-                    element.OnSnapCompleted?.Invoke();
-
-                    if (pageNavigationController != null && element.unlocknavigationOnSnap)
-                        pageNavigationController.EnableNavigationButtons();
-
-                    canDrag = false;
-                    interactionLocked = true;
+                    FinalizeSnap(element);
                 }
 
                 EnableAnimator();
@@ -336,23 +318,37 @@ public class DraggableObject : MonoBehaviour
                 transform.rotation = target.rotation;
 
             snapping = false;
-
-            element.snapped = true;
-            lastSnappedElementIndex = activeElementIndex;
-
-            canDrag = false;
-            interactionLocked = true;
-
-            if (element.highlightObject != null)
-                element.highlightObject.SetActive(false);
-
-            element.OnSnapCompleted?.Invoke();
-
-            if (pageNavigationController != null && element.unlocknavigationOnSnap)
-                pageNavigationController.EnableNavigationButtons();
-
+            FinalizeSnap(element);
             EnableAnimator();
         }
+    }
+
+    private void FinalizeSnap(SnapElement element)
+    {
+        element.snapped = true;
+        lastSnappedElementIndex = activeElementIndex;
+
+        canDrag = false;
+        interactionLocked = true;
+
+        if (element.highlightObject != null)
+            element.highlightObject.SetActive(false);
+
+        // Overwrite the persistent controller with the new snapped transform for this page
+        if (persistentAssetController != null)
+        {
+            persistentAssetController.UpdatePageTransform(
+                element.index,
+                transform.localPosition,
+                transform.localEulerAngles,
+                transform.localScale
+            );
+        }
+
+        element.OnSnapCompleted?.Invoke();
+
+        if (pageNavigationController != null && element.unlocknavigationOnSnap)
+            pageNavigationController.EnableNavigationButtons();
     }
 
     void StartReturn()
@@ -370,21 +366,21 @@ public class DraggableObject : MonoBehaviour
 
     void ReturnToLastValidPosition()
     {
-        Vector3 targetPos = originalPosition;
-
-        if (lastSnappedElementIndex >= 0 &&
-            elements[lastSnappedElementIndex].highlightObject != null)
-        {
-            targetPos = elements[lastSnappedElementIndex].highlightObject.transform.position;
-        }
+        Vector3 targetPos = currentStartPos;
 
         transform.position = Vector3.Lerp(transform.position, targetPos, returnSpeed * Time.deltaTime);
+
+        if (snapRotation)
+            transform.rotation = Quaternion.Slerp(transform.rotation, currentStartRot, returnSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, targetPos) < snapDistance)
         {
             transform.position = targetPos;
-            returning = false;
 
+            if (snapRotation)
+                transform.rotation = currentStartRot;
+
+            returning = false;
             EnableAnimator();
         }
     }
