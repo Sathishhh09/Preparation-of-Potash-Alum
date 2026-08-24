@@ -162,7 +162,9 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         [Tooltip("The wrong collider object.")]
         public Collider wrongCollider;
 
-        [Tooltip("The specific page index where this wrong collider is active.")]
+        [Tooltip(
+            "The specific page index where this wrong collider is active."
+        )]
         public int allowedPageIndex = 0;
     }
 
@@ -193,23 +195,66 @@ public class ObjectClickIdentificationManager : MonoBehaviour
 
 
     // =========================================================
-    // WORLD SPACE POPUPS
+    // PAGE-SPECIFIC CANVAS PARENTS
     // =========================================================
 
-    [Header("World Space Canvas & Prefabs")]
+    [System.Serializable]
+    public class PageCanvasParentRule
+    {
+        [Header("Page")]
 
+        [Tooltip(
+            "0-based page index."
+        )]
+        public int pageIndex;
+
+        [Header("Canvas Parent")]
+
+        [Tooltip(
+            "Canvas/Transform where popups for this page will be spawned."
+        )]
+        public Transform canvasParent;
+    }
+
+    [Header("Page-Specific Canvas Parents")]
+
+    [Tooltip(
+        "Assign a different Canvas parent for each page. " +
+        "The current page is automatically detected using " +
+        "PageNavigationController.CurrentIndex."
+    )]
     [SerializeField]
-    private Transform worldSpaceCanvasParent;
+    private List<PageCanvasParentRule> pageCanvasParents =
+        new List<PageCanvasParentRule>();
 
+
+    // =========================================================
+    // WORLD SPACE POPUP PREFABS
+    // =========================================================
+
+    [Header("World Space Popup Prefabs")]
+
+    [Tooltip(
+        "Popup prefab shown when the correct object is clicked."
+    )]
     [SerializeField]
     private GameObject correctWorldSpacePrefab;
 
+    [Tooltip(
+        "Popup prefab shown when the wrong object is clicked."
+    )]
     [SerializeField]
     private GameObject wrongWorldSpacePrefab;
 
+    [Tooltip(
+        "Vertical offset above the clicked collider."
+    )]
     [SerializeField]
     private float yOffsetDistance = 0.05f;
 
+    [Tooltip(
+        "Scale multiplier applied to spawned popup."
+    )]
     [SerializeField]
     private Vector3 spawnScaleMultiplier =
         new Vector3(
@@ -266,9 +311,11 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
+
             if (audioSource == null)
             {
-                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource =
+                    gameObject.AddComponent<AudioSource>();
             }
         }
 
@@ -304,7 +351,11 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         if (mainCamera == null)
             return;
 
-        for (int i = activePopups.Count - 1; i >= 0; i--)
+        for (
+            int i = activePopups.Count - 1;
+            i >= 0;
+            i--
+        )
         {
             if (activePopups[i] == null)
             {
@@ -312,7 +363,8 @@ public class ObjectClickIdentificationManager : MonoBehaviour
                 continue;
             }
 
-            activePopups[i].rotation = mainCamera.transform.rotation;
+            activePopups[i].rotation =
+                mainCamera.transform.rotation;
         }
     }
 
@@ -370,11 +422,17 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         if (mainCamera == null)
             return;
 
-        // Do not allow object clicks while camera is moving.
+        // -----------------------------------------------------
+        // DO NOT ALLOW OBJECT CLICKS WHILE CAMERA IS MOVING
+        // -----------------------------------------------------
+
         if (isCameraMoving)
             return;
 
-        // Do not allow clicking objects while the description UI is open.
+        // -----------------------------------------------------
+        // DO NOT ALLOW CLICKS WHILE DESCRIPTION UI IS OPEN
+        // -----------------------------------------------------
+
         if (
             descriptionUI != null &&
             descriptionUI.activeSelf
@@ -383,7 +441,10 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             return;
         }
 
-        // Prevent raycasting into 3D world when clicking on UI buttons or canvas
+        // -----------------------------------------------------
+        // PREVENT RAYCAST THROUGH UI
+        // -----------------------------------------------------
+
         if (
             EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject()
@@ -392,10 +453,18 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             return;
         }
 
+        // -----------------------------------------------------
+        // CREATE CAMERA RAY
+        // -----------------------------------------------------
+
         Ray ray =
             mainCamera.ScreenPointToRay(
                 screenPoint
             );
+
+        // -----------------------------------------------------
+        // RAYCAST
+        // -----------------------------------------------------
 
         if (
             Physics.Raycast(
@@ -404,6 +473,10 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             )
         )
         {
+            // -------------------------------------------------
+            // CHECK CORRECT TARGET
+            // -------------------------------------------------
+
             int matchedIndex =
                 GetMatchingCorrectTargetIndex(
                     hit.collider
@@ -416,7 +489,17 @@ public class ObjectClickIdentificationManager : MonoBehaviour
                     hit.collider
                 );
             }
-            else if (IsWrongColliderMatch(hit.collider, out Collider matchedWrongCollider))
+
+            // -------------------------------------------------
+            // CHECK WRONG TARGET
+            // -------------------------------------------------
+
+            else if (
+                IsWrongColliderMatch(
+                    hit.collider,
+                    out Collider matchedWrongCollider
+                )
+            )
             {
                 ProcessWrongClick(
                     matchedWrongCollider
@@ -427,14 +510,16 @@ public class ObjectClickIdentificationManager : MonoBehaviour
 
 
     // =========================================================
-    // FIND CORRECT TARGET (PAGE FILTERED)
+    // FIND CORRECT TARGET
+    // PAGE FILTERED
     // =========================================================
 
     private int GetMatchingCorrectTargetIndex(
         Collider hitCollider
     )
     {
-        int currentPage = PageNavigationController.CurrentIndex;
+        int currentPage =
+            PageNavigationController.CurrentIndex;
 
         for (
             int i = 0;
@@ -445,8 +530,17 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             IdentificationTarget target =
                 correctTargets[i];
 
-            // Only match if it belongs to the current page index
-            if (target.allowedPageIndex != currentPage)
+            if (target == null)
+                continue;
+
+            // -------------------------------------------------
+            // ONLY MATCH CURRENT PAGE
+            // -------------------------------------------------
+
+            if (
+                target.allowedPageIndex !=
+                currentPage
+            )
             {
                 continue;
             }
@@ -458,6 +552,10 @@ public class ObjectClickIdentificationManager : MonoBehaviour
                 continue;
             }
 
+            // -------------------------------------------------
+            // DIRECT COLLIDER MATCH
+            // -------------------------------------------------
+
             if (
                 target.clickableCollider ==
                 hitCollider
@@ -465,6 +563,10 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             {
                 return i;
             }
+
+            // -------------------------------------------------
+            // CHILD COLLIDER MATCH
+            // -------------------------------------------------
 
             if (
                 hitCollider.transform.IsChildOf(
@@ -481,7 +583,8 @@ public class ObjectClickIdentificationManager : MonoBehaviour
 
 
     // =========================================================
-    // FIND WRONG TARGET (PAGE FILTERED)
+    // FIND WRONG TARGET
+    // PAGE FILTERED
     // =========================================================
 
     private bool IsWrongColliderMatch(
@@ -489,31 +592,58 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         out Collider matchedCollider
     )
     {
-        int currentPage = PageNavigationController.CurrentIndex;
+        int currentPage =
+            PageNavigationController.CurrentIndex;
 
-        for (int i = 0; i < wrongTargets.Count; i++)
+        for (
+            int i = 0;
+            i < wrongTargets.Count;
+            i++
+        )
         {
-            WrongTargetRule wrongRule = wrongTargets[i];
+            WrongTargetRule wrongRule =
+                wrongTargets[i];
+
+            if (wrongRule == null)
+                continue;
 
             if (wrongRule.wrongCollider == null)
+                continue;
+
+            // -------------------------------------------------
+            // ONLY MATCH CURRENT PAGE
+            // -------------------------------------------------
+
+            if (
+                wrongRule.allowedPageIndex !=
+                currentPage
+            )
             {
                 continue;
             }
 
-            // Only match if the wrong item belongs to the current page index
-            if (wrongRule.allowedPageIndex != currentPage)
-            {
-                continue;
-            }
+            // -------------------------------------------------
+            // DIRECT OR CHILD COLLIDER MATCH
+            // -------------------------------------------------
 
-            if (wrongRule.wrongCollider == hitCollider || hitCollider.transform.IsChildOf(wrongRule.wrongCollider.transform))
+            if (
+                wrongRule.wrongCollider ==
+                hitCollider
+                ||
+                hitCollider.transform.IsChildOf(
+                    wrongRule.wrongCollider.transform
+                )
+            )
             {
-                matchedCollider = wrongRule.wrongCollider;
+                matchedCollider =
+                    wrongRule.wrongCollider;
+
                 return true;
             }
         }
 
         matchedCollider = null;
+
         return false;
     }
 
@@ -538,7 +668,14 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         IdentificationTarget target =
             correctTargets[index];
 
+        if (target == null)
+            return;
+
         currentTargetIndex = index;
+
+        // -----------------------------------------------------
+        // PLAY CORRECT SOUND
+        // -----------------------------------------------------
 
         PlaySound(correctSound);
 
@@ -672,12 +809,86 @@ public class ObjectClickIdentificationManager : MonoBehaviour
     // AUDIO HELPER
     // =========================================================
 
-    private void PlaySound(AudioClip clip)
+    private void PlaySound(
+        AudioClip clip
+    )
     {
-        if (audioSource != null && clip != null)
+        if (
+            audioSource != null &&
+            clip != null
+        )
         {
             audioSource.PlayOneShot(clip);
         }
+    }
+
+
+    // =========================================================
+    // GET CANVAS PARENT FOR CURRENT PAGE
+    // =========================================================
+
+    private Transform GetCanvasParentForCurrentPage()
+    {
+        int currentPage =
+            PageNavigationController.CurrentIndex;
+
+        // -----------------------------------------------------
+        // SEARCH PAGE CANVAS RULES
+        // -----------------------------------------------------
+
+        for (
+            int i = 0;
+            i < pageCanvasParents.Count;
+            i++
+        )
+        {
+            PageCanvasParentRule rule =
+                pageCanvasParents[i];
+
+            if (rule == null)
+                continue;
+
+            // -------------------------------------------------
+            // FIND CURRENT PAGE
+            // -------------------------------------------------
+
+            if (
+                rule.pageIndex !=
+                currentPage
+            )
+            {
+                continue;
+            }
+
+            // -------------------------------------------------
+            // CHECK CANVAS ASSIGNMENT
+            // -------------------------------------------------
+
+            if (rule.canvasParent == null)
+            {
+                Debug.LogWarning(
+                    "[Identification] Canvas Parent is not assigned for Page " +
+                    currentPage,
+                    this
+                );
+
+                return null;
+            }
+
+            return rule.canvasParent;
+        }
+
+        // -----------------------------------------------------
+        // NO PAGE RULE FOUND
+        // -----------------------------------------------------
+
+        Debug.LogWarning(
+            "[Identification] No Canvas Parent rule found for Page " +
+            currentPage,
+            this
+        );
+
+        return null;
     }
 
 
@@ -754,10 +965,12 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             )
             {
                 isCameraMoving = false;
+
                 yield break;
             }
 
-            elapsed += Time.deltaTime;
+            elapsed +=
+                Time.deltaTime;
 
             float normalizedTime =
                 Mathf.Clamp01(
@@ -787,6 +1000,10 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             yield return null;
         }
 
+        // -----------------------------------------------------
+        // FORCE FINAL POSITION
+        // -----------------------------------------------------
+
         if (mainCamera != null)
         {
             mainCamera.transform.position =
@@ -797,7 +1014,12 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         }
 
         isCameraMoving = false;
+
         cameraMoveCoroutine = null;
+
+        // -----------------------------------------------------
+        // SHOW DESCRIPTION
+        // -----------------------------------------------------
 
         if (
             showDescriptionAfterMovement &&
@@ -830,17 +1052,32 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         IdentificationTarget target =
             correctTargets[index];
 
+        if (target == null)
+            return;
+
+        // -----------------------------------------------------
+        // TITLE
+        // -----------------------------------------------------
+
         if (titleText != null)
         {
             titleText.text =
                 target.title;
         }
 
+        // -----------------------------------------------------
+        // DESCRIPTION
+        // -----------------------------------------------------
+
         if (descriptionText != null)
         {
             descriptionText.text =
                 target.description;
         }
+
+        // -----------------------------------------------------
+        // SHOW UI
+        // -----------------------------------------------------
 
         if (descriptionUI != null)
         {
@@ -855,6 +1092,10 @@ public class ObjectClickIdentificationManager : MonoBehaviour
 
     public void GoBackToDefaultCamera()
     {
+        // -----------------------------------------------------
+        // HIDE DESCRIPTION UI
+        // -----------------------------------------------------
+
         if (descriptionUI != null)
         {
             descriptionUI.SetActive(false);
@@ -872,6 +1113,11 @@ public class ObjectClickIdentificationManager : MonoBehaviour
 
         currentTargetIndex = -1;
 
+
+        // -----------------------------------------------------
+        // CHECK DEFAULT CAMERA
+        // -----------------------------------------------------
+
         if (
             defaultCameraPoint == null
         )
@@ -883,6 +1129,11 @@ public class ObjectClickIdentificationManager : MonoBehaviour
 
             return;
         }
+
+
+        // -----------------------------------------------------
+        // MOVE CAMERA BACK
+        // -----------------------------------------------------
 
         StartCameraMovement(
             defaultCameraPoint,
@@ -921,26 +1172,78 @@ public class ObjectClickIdentificationManager : MonoBehaviour
         Vector3 worldPosition
     )
     {
+        if (prefab == null)
+        {
+            Debug.LogWarning(
+                "[Identification] Popup prefab is missing.",
+                this
+            );
+
+            return;
+        }
+
+        // -----------------------------------------------------
+        // GET CURRENT PAGE
+        // -----------------------------------------------------
+
+        int currentPage =
+            PageNavigationController.CurrentIndex;
+
+
+        // -----------------------------------------------------
+        // GET PAGE-SPECIFIC CANVAS
+        // -----------------------------------------------------
+
+        Transform canvasParent =
+            GetCanvasParentForCurrentPage();
+
+
+        // -----------------------------------------------------
+        // CREATE POPUP
+        // -----------------------------------------------------
+
         GameObject instance;
 
-        if (
-            worldSpaceCanvasParent != null
-        )
+        if (canvasParent != null)
         {
+            // ---------------------------------------------
+            // SPAWN UNDER CURRENT PAGE CANVAS
+            // ---------------------------------------------
+
             instance =
                 Instantiate(
                     prefab,
-                    worldSpaceCanvasParent
+                    canvasParent
                 );
         }
         else
         {
+            // ---------------------------------------------
+            // FALLBACK
+            // ---------------------------------------------
+
             instance =
                 Instantiate(prefab);
+
+            Debug.LogWarning(
+                "[Identification] Popup spawned without Canvas Parent for Page " +
+                currentPage,
+                this
+            );
         }
+
+
+        // -----------------------------------------------------
+        // SET WORLD POSITION
+        // -----------------------------------------------------
 
         instance.transform.position =
             worldPosition;
+
+
+        // -----------------------------------------------------
+        // FACE CAMERA
+        // -----------------------------------------------------
 
         if (mainCamera != null)
         {
@@ -948,7 +1251,19 @@ public class ObjectClickIdentificationManager : MonoBehaviour
                 mainCamera.transform.rotation;
         }
 
-        activePopups.Add(instance.transform);
+
+        // -----------------------------------------------------
+        // ADD TO ACTIVE POPUPS
+        // -----------------------------------------------------
+
+        activePopups.Add(
+            instance.transform
+        );
+
+
+        // -----------------------------------------------------
+        // PLAY POPUP ANIMATION
+        // -----------------------------------------------------
 
         StartCoroutine(
             PopUpAnimation(
@@ -970,7 +1285,13 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             yield break;
 
         float duration = 0.3f;
+
         float elapsed = 0f;
+
+
+        // -----------------------------------------------------
+        // CALCULATE FINAL SCALE
+        // -----------------------------------------------------
 
         Vector3 targetScale =
             Vector3.Scale(
@@ -978,16 +1299,25 @@ public class ObjectClickIdentificationManager : MonoBehaviour
                 spawnScaleMultiplier
             );
 
+
+        // -----------------------------------------------------
+        // START FROM ZERO
+        // -----------------------------------------------------
+
         targetTransform.localScale =
             Vector3.zero;
 
+
+        // -----------------------------------------------------
+        // ANIMATION
+        // -----------------------------------------------------
+
         while (
-            elapsed < duration
+            elapsed <
+            duration
         )
         {
-            if (
-                targetTransform == null
-            )
+            if (targetTransform == null)
             {
                 yield break;
             }
@@ -1018,9 +1348,12 @@ public class ObjectClickIdentificationManager : MonoBehaviour
             yield return null;
         }
 
-        if (
-            targetTransform != null
-        )
+
+        // -----------------------------------------------------
+        // FORCE FINAL SCALE
+        // -----------------------------------------------------
+
+        if (targetTransform != null)
         {
             targetTransform.localScale =
                 targetScale;
