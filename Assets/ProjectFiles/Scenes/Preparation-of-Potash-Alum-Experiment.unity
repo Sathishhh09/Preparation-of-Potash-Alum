@@ -58801,8 +58801,6 @@ GameObject:
   - component: {fileID: 5927979776749038363}
   - component: {fileID: 5927979776749038364}
   - component: {fileID: 5927979776749038365}
-  - component: {fileID: 5927979776749038366}
-  - component: {fileID: 5927979776749038367}
   m_Layer: 0
   m_Name: 25ml beaker
   m_TagString: Untagged
@@ -66518,7 +66516,7 @@ MonoBehaviour:
     ignoreFirstEnable: 0
   - pageIndex: 3
     localPosition: {x: -0.45394617, y: 1.0146405, z: 0.21938239}
-    localEulerRotation: {x: 270.01978, y: 0, z: 0}
+    localEulerRotation: {x: -89.98, y: 0, z: 0}
     localScale: {x: 100, y: 100, z: 100}
     ignoreFirstEnable: 0
   - pageIndex: 4
@@ -66603,55 +66601,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5927979776749038365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3554304851550791181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e1f81991521ed4d82c776708bad02e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TouchOrClickEvent
-  OnTouched:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents:
-  - requiredPageIndex: 24
-    onInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5927979776749038366}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1791664091}
-          m_TargetAssemblyTypeName: PageMeshHighlightManager, Assembly-CSharp
-          m_MethodName: DisableElement0ByPageIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 24
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    allowMultipleTriggers: 0
-    hasTriggered: 0
-  targetCamera: {fileID: 0}
-  ignoreUI: 1
---- !u!95 &5927979776749038366
+--- !u!95 &5927979776749038365
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -66661,7 +66611,7 @@ Animator:
   m_GameObject: {fileID: 3554304851550791181}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 16bba21be5934fc4baa1032ff13cfe41, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5fdc39fe71a1c7b4389c4589384843ec, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -66673,34 +66623,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5927979776749038367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3554304851550791181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5927979776749038366}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
 --- !u!4 &5933640735395800763
 Transform:
   m_ObjectHideFlags: 0
