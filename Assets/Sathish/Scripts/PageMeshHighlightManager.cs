@@ -10,14 +10,22 @@ public class PageMeshHighlightManager : MonoBehaviour
     [System.Serializable]
     public class MeshHighlightEntry
     {
-        [Tooltip("The parent GameObject. All child MeshRenderer and SkinnedMeshRenderer components will be highlighted.")]
+        [Header("Target GameObject")]
+
+        [Tooltip(
+            "The parent GameObject. " +
+            "All child objects containing MeshRenderer or " +
+            "SkinnedMeshRenderer will also be highlighted."
+        )]
         [SerializeField] private GameObject targetObject;
 
         [Tooltip("Automatically highlight when this page opens.")]
         [SerializeField] private bool autoHighlightOnPageEnter = false;
 
         public GameObject TargetObject => targetObject;
-        public bool AutoHighlightOnPageEnter => autoHighlightOnPageEnter;
+
+        public bool AutoHighlightOnPageEnter =>
+            autoHighlightOnPageEnter;
     }
 
 
@@ -29,9 +37,11 @@ public class PageMeshHighlightManager : MonoBehaviour
     public class PageHighlightConfig
     {
         [Header("Page Index")]
+
         public int pageIndex = 0;
 
         [Header("Target Objects")]
+
         public List<MeshHighlightEntry> meshEntries =
             new List<MeshHighlightEntry>();
     }
@@ -42,9 +52,12 @@ public class PageMeshHighlightManager : MonoBehaviour
     // ==========================================================
 
     [Header("Highlight Material")]
+
     [SerializeField] private Material highlightMaterial;
 
+
     [Header("Page Configurations")]
+
     [SerializeField] private List<PageHighlightConfig> pageConfigs =
         new List<PageHighlightConfig>();
 
@@ -55,6 +68,7 @@ public class PageMeshHighlightManager : MonoBehaviour
 
     private readonly HashSet<Renderer> highlightedRenderers =
         new HashSet<Renderer>();
+
 
     // Tracks entries that were manually disabled.
     private readonly HashSet<string> disabledEntries =
@@ -70,14 +84,18 @@ public class PageMeshHighlightManager : MonoBehaviour
         PageNavigationController.OnPageChanged += HandlePageChanged;
     }
 
+
     private void OnDisable()
     {
         PageNavigationController.OnPageChanged -= HandlePageChanged;
     }
 
+
     private void Start()
     {
-        HandlePageChanged(PageNavigationController.CurrentIndex);
+        HandlePageChanged(
+            PageNavigationController.CurrentIndex
+        );
     }
 
 
@@ -87,25 +105,34 @@ public class PageMeshHighlightManager : MonoBehaviour
 
     private void HandlePageChanged(int currentPageIndex)
     {
-        // Remove highlights from the previous page.
+        // Remove highlights from previous page.
         ClearAllHighlightsGlobal();
+
 
         PageHighlightConfig config =
             GetConfigByPageIndex(currentPageIndex);
 
+
         if (config == null)
             return;
 
+
         for (int i = 0; i < config.meshEntries.Count; i++)
         {
-            MeshHighlightEntry entry = config.meshEntries[i];
+            MeshHighlightEntry entry =
+                config.meshEntries[i];
+
 
             if (entry == null)
                 continue;
 
-            // Auto highlight only if this entry was not disabled.
-            if (entry.AutoHighlightOnPageEnter &&
-                !IsEntryDisabled(currentPageIndex, i))
+
+            // Auto highlight only if this entry
+            // was not manually disabled.
+            if (
+                entry.AutoHighlightOnPageEnter &&
+                !IsEntryDisabled(currentPageIndex, i)
+            )
             {
                 ApplyHighlightToEntry(entry);
             }
@@ -122,25 +149,30 @@ public class PageMeshHighlightManager : MonoBehaviour
         EnableElementHighlight(pageIndex, 0);
     }
 
+
     public void DisableElement0ByPageIndex(int pageIndex)
     {
         DisableElementHighlight(pageIndex, 0);
     }
+
 
     public void EnableElement1ByPageIndex(int pageIndex)
     {
         EnableElementHighlight(pageIndex, 1);
     }
 
+
     public void DisableElement1ByPageIndex(int pageIndex)
     {
         DisableElementHighlight(pageIndex, 1);
     }
 
+
     public void EnableElement2ByPageIndex(int pageIndex)
     {
         EnableElementHighlight(pageIndex, 2);
     }
+
 
     public void DisableElement2ByPageIndex(int pageIndex)
     {
@@ -154,21 +186,31 @@ public class PageMeshHighlightManager : MonoBehaviour
 
     public void EnableElementHighlight(
         int pageIndex,
-        int elementIndex)
+        int elementIndex
+    )
     {
         PageHighlightConfig config =
             GetConfigByPageIndex(pageIndex);
 
+
         if (config == null)
             return;
 
-        if (elementIndex < 0 ||
-            elementIndex >= config.meshEntries.Count)
+
+        if (
+            elementIndex < 0 ||
+            elementIndex >= config.meshEntries.Count
+        )
             return;
 
+
         disabledEntries.Remove(
-            GetEntryKey(pageIndex, elementIndex)
+            GetEntryKey(
+                pageIndex,
+                elementIndex
+            )
         );
+
 
         ApplyHighlightToEntry(
             config.meshEntries[elementIndex]
@@ -182,21 +224,31 @@ public class PageMeshHighlightManager : MonoBehaviour
 
     public void DisableElementHighlight(
         int pageIndex,
-        int elementIndex)
+        int elementIndex
+    )
     {
         PageHighlightConfig config =
             GetConfigByPageIndex(pageIndex);
 
+
         if (config == null)
             return;
 
-        if (elementIndex < 0 ||
-            elementIndex >= config.meshEntries.Count)
+
+        if (
+            elementIndex < 0 ||
+            elementIndex >= config.meshEntries.Count
+        )
             return;
 
+
         disabledEntries.Add(
-            GetEntryKey(pageIndex, elementIndex)
+            GetEntryKey(
+                pageIndex,
+                elementIndex
+            )
         );
+
 
         RemoveHighlightFromEntry(
             config.meshEntries[elementIndex]
@@ -208,19 +260,31 @@ public class PageMeshHighlightManager : MonoBehaviour
     // ENABLE ALL PAGE ELEMENTS
     // ==========================================================
 
-    public void EnableAllHighlightsForPageIndex(int pageIndex)
+    public void EnableAllHighlightsForPageIndex(
+        int pageIndex
+    )
     {
         PageHighlightConfig config =
             GetConfigByPageIndex(pageIndex);
 
+
         if (config == null)
             return;
 
-        for (int i = 0; i < config.meshEntries.Count; i++)
+
+        for (
+            int i = 0;
+            i < config.meshEntries.Count;
+            i++
+        )
         {
             disabledEntries.Remove(
-                GetEntryKey(pageIndex, i)
+                GetEntryKey(
+                    pageIndex,
+                    i
+                )
             );
+
 
             ApplyHighlightToEntry(
                 config.meshEntries[i]
@@ -233,19 +297,31 @@ public class PageMeshHighlightManager : MonoBehaviour
     // DISABLE ALL PAGE ELEMENTS
     // ==========================================================
 
-    public void DisableAllHighlightsForPageIndex(int pageIndex)
+    public void DisableAllHighlightsForPageIndex(
+        int pageIndex
+    )
     {
         PageHighlightConfig config =
             GetConfigByPageIndex(pageIndex);
 
+
         if (config == null)
             return;
 
-        for (int i = 0; i < config.meshEntries.Count; i++)
+
+        for (
+            int i = 0;
+            i < config.meshEntries.Count;
+            i++
+        )
         {
             disabledEntries.Add(
-                GetEntryKey(pageIndex, i)
+                GetEntryKey(
+                    pageIndex,
+                    i
+                )
             );
+
 
             RemoveHighlightFromEntry(
                 config.meshEntries[i]
@@ -255,41 +331,61 @@ public class PageMeshHighlightManager : MonoBehaviour
 
 
     // ==========================================================
-    // APPLY HIGHLIGHT TO TARGET OBJECT
+    // APPLY HIGHLIGHT TO TARGET + ALL CHILDREN
     // ==========================================================
 
     private void ApplyHighlightToEntry(
-        MeshHighlightEntry entry)
+        MeshHighlightEntry entry
+    )
     {
         if (entry == null)
             return;
 
-        if (entry.TargetObject == null)
+
+        GameObject target =
+            entry.TargetObject;
+
+
+        if (target == null)
             return;
 
-        /*
-         * Get ALL Renderer components from:
-         *
-         * Target Object
-         *      ├── Child 1
-         *      │      └── MeshRenderer
-         *      │
-         *      ├── Child 2
-         *      │      └── MeshRenderer
-         *      │
-         *      └── Child 3
-         *             └── SkinnedMeshRenderer
-         */
 
-        Renderer[] renderers =
-            entry.TargetObject.GetComponentsInChildren<Renderer>(true);
-
-        foreach (Renderer renderer in renderers)
+        if (highlightMaterial == null)
         {
-            // Only allow MeshRenderer
-            // and SkinnedMeshRenderer.
-            if (renderer is MeshRenderer ||
-                renderer is SkinnedMeshRenderer)
+            Debug.LogWarning(
+                "PageMeshHighlightManager: " +
+                "Highlight Material is not assigned."
+            );
+
+            return;
+        }
+
+
+        // ======================================================
+        // GET TARGET + ALL CHILD OBJECTS
+        // ======================================================
+
+        Renderer[] allRenderers =
+            target.GetComponentsInChildren<Renderer>(
+                true
+            );
+
+
+        // ======================================================
+        // APPLY HIGHLIGHT TO EVERY CHILD RENDERER
+        // ======================================================
+
+        foreach (Renderer renderer in allRenderers)
+        {
+            if (renderer == null)
+                continue;
+
+
+            // Only MeshRenderer and SkinnedMeshRenderer.
+            if (
+                renderer is MeshRenderer ||
+                renderer is SkinnedMeshRenderer
+            )
             {
                 ApplyHighlightMaterial(renderer);
             }
@@ -298,25 +394,49 @@ public class PageMeshHighlightManager : MonoBehaviour
 
 
     // ==========================================================
-    // REMOVE HIGHLIGHT FROM TARGET OBJECT
+    // REMOVE HIGHLIGHT FROM TARGET + ALL CHILDREN
     // ==========================================================
 
     private void RemoveHighlightFromEntry(
-        MeshHighlightEntry entry)
+        MeshHighlightEntry entry
+    )
     {
         if (entry == null)
             return;
 
-        if (entry.TargetObject == null)
+
+        GameObject target =
+            entry.TargetObject;
+
+
+        if (target == null)
             return;
 
-        Renderer[] renderers =
-            entry.TargetObject.GetComponentsInChildren<Renderer>(true);
 
-        foreach (Renderer renderer in renderers)
+        // ======================================================
+        // GET TARGET + ALL CHILD OBJECTS
+        // ======================================================
+
+        Renderer[] allRenderers =
+            target.GetComponentsInChildren<Renderer>(
+                true
+            );
+
+
+        // ======================================================
+        // REMOVE HIGHLIGHT FROM EVERY CHILD
+        // ======================================================
+
+        foreach (Renderer renderer in allRenderers)
         {
-            if (renderer is MeshRenderer ||
-                renderer is SkinnedMeshRenderer)
+            if (renderer == null)
+                continue;
+
+
+            if (
+                renderer is MeshRenderer ||
+                renderer is SkinnedMeshRenderer
+            )
             {
                 RemoveHighlightMaterial(renderer);
             }
@@ -328,18 +448,23 @@ public class PageMeshHighlightManager : MonoBehaviour
     // APPLY MATERIAL
     // ==========================================================
 
-    private void ApplyHighlightMaterial(Renderer renderer)
+    private void ApplyHighlightMaterial(
+        Renderer renderer
+    )
     {
         if (renderer == null)
             return;
 
+
         if (highlightMaterial == null)
             return;
+
 
         Material[] materials =
             renderer.sharedMaterials;
 
-        // Check if already highlighted.
+
+        // Check if highlight is already applied.
         foreach (Material material in materials)
         {
             if (material == highlightMaterial)
@@ -349,14 +474,21 @@ public class PageMeshHighlightManager : MonoBehaviour
             }
         }
 
+
+        // Create a new material list.
         List<Material> newMaterials =
             new List<Material>(materials);
 
+
         // Add highlight material.
-        newMaterials.Add(highlightMaterial);
+        newMaterials.Add(
+            highlightMaterial
+        );
+
 
         renderer.sharedMaterials =
             newMaterials.ToArray();
+
 
         highlightedRenderers.Add(renderer);
     }
@@ -367,16 +499,20 @@ public class PageMeshHighlightManager : MonoBehaviour
     // ==========================================================
 
     private void RemoveHighlightMaterial(
-        Renderer renderer)
+        Renderer renderer
+    )
     {
         if (renderer == null)
             return;
 
+
         Material[] materials =
             renderer.sharedMaterials;
 
+
         List<Material> newMaterials =
             new List<Material>();
+
 
         foreach (Material material in materials)
         {
@@ -386,8 +522,10 @@ public class PageMeshHighlightManager : MonoBehaviour
             }
         }
 
+
         renderer.sharedMaterials =
             newMaterials.ToArray();
+
 
         highlightedRenderers.Remove(renderer);
     }
@@ -400,31 +538,47 @@ public class PageMeshHighlightManager : MonoBehaviour
     private void ClearAllHighlightsGlobal()
     {
         // Create a temporary list because
-        // RemoveHighlightMaterial modifies the HashSet.
-
+        // RemoveHighlightMaterialDirect modifies
+        // renderer materials.
         List<Renderer> renderersToClear =
-            new List<Renderer>(highlightedRenderers);
+            new List<Renderer>(
+                highlightedRenderers
+            );
+
 
         foreach (Renderer renderer in renderersToClear)
         {
             if (renderer != null)
             {
-                RemoveHighlightMaterialDirect(renderer);
+                RemoveHighlightMaterialDirect(
+                    renderer
+                );
             }
         }
+
 
         highlightedRenderers.Clear();
 
 
-        // Extra fallback:
-        // Remove highlight from all configured target objects.
+        // ======================================================
+        // FALLBACK
+        // ======================================================
 
-        foreach (PageHighlightConfig config in pageConfigs)
+        // Also search every configured target and
+        // all of its children.
+        foreach (
+            PageHighlightConfig config
+            in pageConfigs
+        )
         {
             if (config == null)
                 continue;
 
-            foreach (MeshHighlightEntry entry in config.meshEntries)
+
+            foreach (
+                MeshHighlightEntry entry
+                in config.meshEntries
+            )
             {
                 RemoveHighlightFromEntry(entry);
             }
@@ -437,18 +591,23 @@ public class PageMeshHighlightManager : MonoBehaviour
     // ==========================================================
 
     private void RemoveHighlightMaterialDirect(
-        Renderer renderer)
+        Renderer renderer
+    )
     {
         if (renderer == null)
             return;
 
+
         Material[] materials =
             renderer.sharedMaterials;
+
 
         List<Material> newMaterials =
             new List<Material>();
 
+
         bool materialRemoved = false;
+
 
         foreach (Material material in materials)
         {
@@ -461,6 +620,7 @@ public class PageMeshHighlightManager : MonoBehaviour
                 newMaterials.Add(material);
             }
         }
+
 
         if (materialRemoved)
         {
@@ -476,7 +636,8 @@ public class PageMeshHighlightManager : MonoBehaviour
 
     private string GetEntryKey(
         int pageIndex,
-        int elementIndex)
+        int elementIndex
+    )
     {
         return $"{pageIndex}_{elementIndex}";
     }
@@ -484,25 +645,36 @@ public class PageMeshHighlightManager : MonoBehaviour
 
     private bool IsEntryDisabled(
         int pageIndex,
-        int elementIndex)
+        int elementIndex
+    )
     {
         return disabledEntries.Contains(
-            GetEntryKey(pageIndex, elementIndex)
+            GetEntryKey(
+                pageIndex,
+                elementIndex
+            )
         );
     }
 
 
     private PageHighlightConfig GetConfigByPageIndex(
-        int pageIndex)
+        int pageIndex
+    )
     {
-        foreach (PageHighlightConfig config in pageConfigs)
+        foreach (
+            PageHighlightConfig config
+            in pageConfigs
+        )
         {
-            if (config != null &&
-                config.pageIndex == pageIndex)
+            if (
+                config != null &&
+                config.pageIndex == pageIndex
+            )
             {
                 return config;
             }
         }
+
 
         return null;
     }
