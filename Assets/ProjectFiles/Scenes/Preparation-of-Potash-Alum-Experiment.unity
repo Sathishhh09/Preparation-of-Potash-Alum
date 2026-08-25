@@ -34170,10 +34170,6 @@ MonoBehaviour:
       stayInUpcomingPages: 0
       enableOnce: 0
       hasBeenEnabledOnce: 0
-    - panel: {fileID: 3554304851550791181}
-      stayInUpcomingPages: 0
-      enableOnce: 0
-      hasBeenEnabledOnce: 0
     - panel: {fileID: 6717587149563921675}
       stayInUpcomingPages: 0
       enableOnce: 0
@@ -34204,10 +34200,6 @@ MonoBehaviour:
       enableOnce: 0
       hasBeenEnabledOnce: 0
     - panel: {fileID: 2630900551142365013}
-      stayInUpcomingPages: 0
-      enableOnce: 0
-      hasBeenEnabledOnce: 0
-    - panel: {fileID: 3554304851550791181}
       stayInUpcomingPages: 0
       enableOnce: 0
       hasBeenEnabledOnce: 0
