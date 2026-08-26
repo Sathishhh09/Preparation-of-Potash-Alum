@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
+  m_Name: MCQ_004
+  m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
+  questionText: Which of the following mixtures is used to wash the crystals of potash
+    alum formed during the experiment?
+  referenceImage: {fileID: 0}
+  explanationText: The crystals of potash alum are washed with a cold water-alcohol
+    mixture to remove adhering impurities while minimizing the loss of alum crystals.
+  options:
+  - Cold water-alcohol mixture
+  - Cold water-ammonia mixture
+  - Alcohol-ammonia mixture
+  - Alcohol-carboxylic acid mixture
+  correctOptionIndex: 0

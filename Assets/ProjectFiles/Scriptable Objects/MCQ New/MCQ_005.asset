@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
+  m_Name: MCQ_005
+  m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
+  questionText: Which of the following is true about the aqueous solution of potash
+    alum?
+  referenceImage: {fileID: 0}
+  explanationText: "Potash alum dissociates in water to produce K<sup>+</sup>, Al<sup>3+</sup>
+    and SO<sub>4</sub><sup>2\u2212</sup> ions. Al<sup>3+</sup> gets attracted towards
+    the lone pair of electrons present on the oxygen in water molecules and thus
+    undergoes hydrolysis. Al<sup>3+</sup> + 6H<sub>2</sub>O \u21CC [Al(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup>;
+    [Al(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> + H<sub>2</sub>O \u21CC [Al(H<sub>2</sub>O)<sub>5</sub>(OH)]<sup>2+</sup>
+    + H<sub>3</sub>O<sup>+</sup>. It is due to the hydrolysis of Al<sup>3+</sup>
+    ions that H<sub>3</sub>O<sup>+</sup> ions are produced, and hence, the aqueous
+    solution of potash alum is acidic. Thus, it can turn blue litmus red."
+  options:
+  - It turns red litmus blue
+  - It turns blue litmus red
+  - It has no effect on litmus paper
+  - It is neutral in nature
+  correctOptionIndex: 1

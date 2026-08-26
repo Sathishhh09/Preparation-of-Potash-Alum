@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
+  m_Name: MCQ_002
+  m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
+  questionText: What is the correct ratio of aluminium, potassium and sulphate ions
+    in a formula unit of potash alum?
+  referenceImage: {fileID: 0}
+  explanationText: The chemical formula of potash alum is K<sub>2</sub>SO<sub>4</sub>.Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>.24H<sub>2</sub>O
+    or KAl(SO<sub>4</sub>)<sub>2</sub>.12H<sub>2</sub>O. Hence, the ratio of aluminium,
+    potassium and sulphate ions in a formula unit of potash alum is 1:1:2.
+  options:
+  - 1:2:1
+  - 2:1:1
+  - 2:1:2
+  - 1:1:2
+  correctOptionIndex: 3
