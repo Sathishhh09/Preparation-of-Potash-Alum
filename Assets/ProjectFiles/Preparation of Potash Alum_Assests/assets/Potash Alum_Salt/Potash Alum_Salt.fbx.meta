@@ -3,7 +3,32 @@ guid: da03967e3a7346345ba2fe3595253dbd
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bonds
+    second: {fileID: 2100000, guid: 49195cf8a3df38040a5a131afebe8809, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Charges
+    second: {fileID: 2100000, guid: 70e6a600b042ed94eb7bd58031fe5f64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Molecule_Set_1_M
+    second: {fileID: 2100000, guid: e07fc5382865669479b8988411d22b60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Molecules
+    second: {fileID: 2100000, guid: 33ff583fc72cba84a84b5c486858f5a8, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Molecule set 1_Molecule_Set_1_M_AlbedoTransparency
+    second: {fileID: 2800000, guid: e3f0893493784e04a9fd11344e3b27d9, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
