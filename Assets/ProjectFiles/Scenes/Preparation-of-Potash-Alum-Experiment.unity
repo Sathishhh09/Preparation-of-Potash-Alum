@@ -1754,7 +1754,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e12be29548b44e64da6fb2fa8dbd46a1, type: 2}
+  - {fileID: 2100000, guid: f4b4b5111688ede4ca4c0fec5bb322b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -36243,7 +36243,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e12be29548b44e64da6fb2fa8dbd46a1, type: 2}
+  - {fileID: 2100000, guid: f4b4b5111688ede4ca4c0fec5bb322b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90905,24 +90905,6 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
-          m_CallState: 2
-    allowMultipleTriggers: 0
-    hasTriggered: 0
-  - requiredPageIndex: 9
-    onInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1051408501}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
           m_CallState: 2
     allowMultipleTriggers: 0
     hasTriggered: 0
