@@ -10,17 +10,24 @@ public class DraggableObject : MonoBehaviour
     public class SnapElement
     {
         public int index;
+
         public bool unlocknavigationOnSnap = true;
+
         public GameObject highlightObject;
+
         public bool restoreToSnapWhenConditionActive = true;
+
         public UnityEvent OnSnapCompleted;
 
         [Header("Display Options")]
         [Tooltip("If enabled, first time this index is reached, interaction will be ignored.")]
         public bool enableFirstIgnore = false;
 
-        [HideInInspector] public bool hasVisitedOnce = false;
-        [HideInInspector] public Collider highlightCollider;
+        [HideInInspector]
+        public bool hasVisitedOnce = false;
+
+        [HideInInspector]
+        public Collider highlightCollider;
 
         [Header("Debugging Only")]
         [Tooltip("True once snapping is completed. Dragging will be disabled.")]
@@ -28,7 +35,8 @@ public class DraggableObject : MonoBehaviour
     }
 
     [Header("Snap Elements")]
-    [SerializeField] private List<SnapElement> elements = new List<SnapElement>();
+    [SerializeField]
+    private List<SnapElement> elements = new List<SnapElement>();
 
     [Header("Movement")]
     [SerializeField] private float snapSpeed = 8f;
@@ -69,12 +77,21 @@ public class DraggableObject : MonoBehaviour
     private Vector3 currentStartPos;
     private Quaternion currentStartRot;
 
-    void Awake()
+
+    // ============================================================
+    // AWAKE
+    // ============================================================
+
+    private void Awake()
     {
-        pageNavigationController = FindFirstObjectByType<PageNavigationController>();
-        persistentAssetController = GetComponent<PersistentAssetController>();
+        pageNavigationController =
+            FindFirstObjectByType<PageNavigationController>();
+
+        persistentAssetController =
+            GetComponent<PersistentAssetController>();
 
         mainCam = Camera.main;
+
         if (mainCam == null)
             mainCam = FindFirstObjectByType<Camera>();
 
@@ -84,30 +101,82 @@ public class DraggableObject : MonoBehaviour
         {
             if (element.highlightObject != null)
             {
-                element.highlightCollider = element.highlightObject.GetComponent<Collider>();
+                element.highlightCollider =
+                    element.highlightObject.GetComponent<Collider>();
+
                 element.highlightObject.SetActive(false);
             }
         }
     }
 
+
+    // ============================================================
+    // ENABLE
+    // ============================================================
+
     private void OnEnable()
     {
         PageNavigationController.OnPageChanged += HandlePageChanged;
+
+        // IMPORTANT:
+        // The object may be enabled AFTER the page has already
+        // changed.
+        //
+        // Therefore, directly check the current page here.
+        if (PageNavigationController.CurrentIndex >= 0)
+        {
+            HandlePageChanged(PageNavigationController.CurrentIndex);
+        }
     }
+
+
+    // ============================================================
+    // DISABLE
+    // ============================================================
 
     private void OnDisable()
     {
         PageNavigationController.OnPageChanged -= HandlePageChanged;
+
+        isDragging = false;
+        snapping = false;
+        returning = false;
+        canDrag = false;
+        interactionLocked = true;
     }
+
+
+    // ============================================================
+    // START
+    // ============================================================
 
     private void Start()
     {
-        HandlePageChanged(PageNavigationController.CurrentIndex);
+        // Extra safety check.
+        //
+        // If this object was enabled before the page controller
+        // finished initializing, check the page again here.
+
+        if (PageNavigationController.CurrentIndex >= 0)
+        {
+            HandlePageChanged(PageNavigationController.CurrentIndex);
+        }
     }
+
+
+    // ============================================================
+    // PAGE CHANGED
+    // ============================================================
 
     private void HandlePageChanged(int pageIndex)
     {
         ResetState();
+
+        activeElementIndex = -1;
+
+        // --------------------------------------------------------
+        // Find the Snap Element matching the current page index
+        // --------------------------------------------------------
 
         for (int i = 0; i < elements.Count; i++)
         {
@@ -118,33 +187,95 @@ public class DraggableObject : MonoBehaviour
             }
         }
 
+        // --------------------------------------------------------
+        // No matching index
+        // --------------------------------------------------------
+
         canDrag = false;
-        activeElementIndex = -1;
+        interactionLocked = true;
     }
 
-    void ResetState()
+
+    // ============================================================
+    // RESET STATE
+    // ============================================================
+
+    private void ResetState()
     {
         isDragging = false;
         snapping = false;
         returning = false;
     }
 
-    void ActivateElement(int index)
+
+    // ============================================================
+    // ACTIVATE ELEMENT
+    // ============================================================
+
+    private void ActivateElement(int index)
     {
+        if (index < 0 || index >= elements.Count)
+            return;
+
         activeElementIndex = index;
+
         interactionLocked = false;
 
-        var element = elements[index];
+        SnapElement element = elements[index];
 
-        if (element.enableFirstIgnore && !element.hasVisitedOnce)
+
+        // ========================================================
+        // IMPORTANT INDEX CHECK
+        // ========================================================
+        //
+        // The GameObject itself can be enabled on page 38.
+        //
+        // When OnEnable() runs, the current page is checked.
+        //
+        // If:
+        //
+        // element.index = 38
+        //
+        // and:
+        //
+        // CurrentIndex = 38
+        //
+        // this element becomes draggable.
+        //
+        // ========================================================
+
+        if (element.index != PageNavigationController.CurrentIndex)
         {
-            element.hasVisitedOnce = true;
             canDrag = false;
             interactionLocked = true;
             return;
         }
 
+
+        // ========================================================
+        // FIRST IGNORE
+        // ========================================================
+
+        if (element.enableFirstIgnore &&
+            !element.hasVisitedOnce)
+        {
+            element.hasVisitedOnce = true;
+
+            canDrag = false;
+            interactionLocked = true;
+
+            return;
+        }
+
+
+        // Mark this index as visited
+
         element.hasVisitedOnce = true;
+
+
+        // ========================================================
+        // CHECK SNAPPED STATE
+        // ========================================================
 
         if (element.snapped)
         {
@@ -153,28 +284,58 @@ public class DraggableObject : MonoBehaviour
         }
         else
         {
+            // ====================================================
+            // OBJECT IS DRAGGABLE
+            // ====================================================
+
             canDrag = true;
+            interactionLocked = false;
         }
+
+
+        // ========================================================
+        // RESTORE SNAPPED POSITION
+        // ========================================================
 
         if (element.restoreToSnapWhenConditionActive &&
             element.snapped &&
             element.highlightObject != null)
         {
-            Transform t = element.highlightObject.transform;
-            transform.position = t.position;
+            Transform target =
+                element.highlightObject.transform;
+
+            transform.position =
+                target.position;
 
             if (snapRotation)
-                transform.rotation = t.rotation;
+            {
+                transform.rotation =
+                    target.rotation;
+            }
         }
     }
 
-    void Update()
+
+    // ============================================================
+    // UPDATE
+    // ============================================================
+
+    private void Update()
     {
+        // --------------------------------------------------------
+        // Return
+        // --------------------------------------------------------
+
         if (returning)
         {
             ReturnToLastValidPosition();
             return;
         }
+
+
+        // --------------------------------------------------------
+        // Snapping
+        // --------------------------------------------------------
 
         if (!triggerEventOnly && snapping)
         {
@@ -182,69 +343,176 @@ public class DraggableObject : MonoBehaviour
             return;
         }
 
+
+        // --------------------------------------------------------
+        // Drag Check
+        // --------------------------------------------------------
+
         if (!canDrag || interactionLocked)
             return;
+
 
         HandleInput();
     }
 
-    void HandleInput()
+
+    // ============================================================
+    // HANDLE INPUT
+    // ============================================================
+
+    private void HandleInput()
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+        {
             return;
+        }
+
+
+        // Mouse Down
 
         if (Input.GetMouseButtonDown(0))
+        {
             TryStartDrag(Input.mousePosition);
+        }
 
-        if (isDragging && Input.GetMouseButton(0))
+
+        // Drag
+
+        if (isDragging &&
+            Input.GetMouseButton(0))
+        {
             Drag(Input.mousePosition);
+        }
 
-        if (isDragging && Input.GetMouseButtonUp(0))
+
+        // Mouse Up
+
+        if (isDragging &&
+            Input.GetMouseButtonUp(0))
+        {
             Release();
+        }
     }
 
-    void TryStartDrag(Vector3 inputPos)
+
+    // ============================================================
+    // TRY START DRAG
+    // ============================================================
+
+    private void TryStartDrag(Vector3 inputPos)
     {
-        if (activeElementIndex < 0) return;
+        if (activeElementIndex < 0)
+            return;
 
-        var element = elements[activeElementIndex];
-        if (element.snapped) return;
 
-        Ray ray = mainCam.ScreenPointToRay(inputPos);
+        SnapElement element =
+            elements[activeElementIndex];
+
+
+        if (element.snapped)
+            return;
+
+
+        // --------------------------------------------------------
+        // Double-check current page
+        // --------------------------------------------------------
+
+        if (element.index != PageNavigationController.CurrentIndex)
+            return;
+
+
+        Ray ray =
+            mainCam.ScreenPointToRay(inputPos);
+
         RaycastHit hit;
+
 
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider == objectCollider)
             {
                 isDragging = true;
-                currentStartPos = transform.position;
-                currentStartRot = transform.rotation;
+
+                currentStartPos =
+                    transform.position;
+
+                currentStartRot =
+                    transform.rotation;
+
+
+                // ------------------------------------------------
+                // Drag Start Event
+                // ------------------------------------------------
 
                 OnDragStart?.Invoke();
 
-                if (animator != null && animator.enabled)
-                    animator.enabled = false;
 
-                objectScreenZ = mainCam.WorldToScreenPoint(transform.position).z;
-                offset = transform.position - GetWorldPosition(inputPos);
+                // ------------------------------------------------
+                // Disable Animator
+                // ------------------------------------------------
+
+                if (animator != null &&
+                    animator.enabled)
+                {
+                    animator.enabled = false;
+                }
+
+
+                // ------------------------------------------------
+                // Screen Z
+                // ------------------------------------------------
+
+                objectScreenZ =
+                    mainCam.WorldToScreenPoint(
+                        transform.position
+                    ).z;
+
+
+                // ------------------------------------------------
+                // Offset
+                // ------------------------------------------------
+
+                offset =
+                    transform.position -
+                    GetWorldPosition(inputPos);
+
+
+                // ------------------------------------------------
+                // Show Highlight
+                // ------------------------------------------------
 
                 if (element.highlightObject != null)
+                {
                     element.highlightObject.SetActive(true);
+                }
             }
         }
     }
 
-    void Drag(Vector3 inputPos)
+
+    // ============================================================
+    // DRAG
+    // ============================================================
+
+    private void Drag(Vector3 inputPos)
     {
-        transform.position = GetWorldPosition(inputPos) + offset;
+        transform.position =
+            GetWorldPosition(inputPos) + offset;
     }
 
-    void Release()
+
+    // ============================================================
+    // RELEASE
+    // ============================================================
+
+    private void Release()
     {
-        if (!isDragging) return;
+        if (!isDragging)
+            return;
 
         isDragging = false;
+
 
         if (activeElementIndex < 0)
         {
@@ -253,7 +521,10 @@ public class DraggableObject : MonoBehaviour
             return;
         }
 
-        var element = elements[activeElementIndex];
+
+        SnapElement element =
+            elements[activeElementIndex];
+
 
         if (element.highlightCollider == null)
         {
@@ -262,7 +533,20 @@ public class DraggableObject : MonoBehaviour
             return;
         }
 
-        bool inside = objectCollider.bounds.Intersects(element.highlightCollider.bounds);
+
+        // --------------------------------------------------------
+        // Check overlap
+        // --------------------------------------------------------
+
+        bool inside =
+            objectCollider.bounds.Intersects(
+                element.highlightCollider.bounds
+            );
+
+
+        // ========================================================
+        // TRIGGER EVENT ONLY
+        // ========================================================
 
         if (triggerEventOnly)
         {
@@ -283,6 +567,11 @@ public class DraggableObject : MonoBehaviour
             return;
         }
 
+
+        // ========================================================
+        // NORMAL SNAP
+        // ========================================================
+
         if (inside && !element.snapped)
         {
             snapping = true;
@@ -293,9 +582,23 @@ public class DraggableObject : MonoBehaviour
         }
     }
 
-    void SnapToHighlight()
+
+    // ============================================================
+    // SNAP TO HIGHLIGHT
+    // ============================================================
+
+    private void SnapToHighlight()
     {
-        var element = elements[activeElementIndex];
+        if (activeElementIndex < 0)
+        {
+            StartReturn();
+            return;
+        }
+
+
+        SnapElement element =
+            elements[activeElementIndex];
+
 
         if (element.highlightObject == null)
         {
@@ -303,38 +606,101 @@ public class DraggableObject : MonoBehaviour
             return;
         }
 
-        Transform target = element.highlightObject.transform;
 
-        transform.position = Vector3.Lerp(transform.position, target.position, snapSpeed * Time.deltaTime);
+        Transform target =
+            element.highlightObject.transform;
+
+
+        // --------------------------------------------------------
+        // Position
+        // --------------------------------------------------------
+
+        transform.position =
+            Vector3.Lerp(
+                transform.position,
+                target.position,
+                snapSpeed * Time.deltaTime
+            );
+
+
+        // --------------------------------------------------------
+        // Rotation
+        // --------------------------------------------------------
 
         if (snapRotation)
-            transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, snapSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, target.position) < snapDistance)
         {
-            transform.position = target.position;
+            transform.rotation =
+                Quaternion.Slerp(
+                    transform.rotation,
+                    target.rotation,
+                    snapSpeed * Time.deltaTime
+                );
+        }
+
+
+        // --------------------------------------------------------
+        // Snap complete
+        // --------------------------------------------------------
+
+        if (Vector3.Distance(
+                transform.position,
+                target.position
+            ) < snapDistance)
+        {
+            transform.position =
+                target.position;
+
 
             if (snapRotation)
-                transform.rotation = target.rotation;
+            {
+                transform.rotation =
+                    target.rotation;
+            }
+
 
             snapping = false;
+
             FinalizeSnap(element);
+
             EnableAnimator();
         }
     }
 
+
+    // ============================================================
+    // FINALIZE SNAP
+    // ============================================================
+
     private void FinalizeSnap(SnapElement element)
     {
         element.snapped = true;
-        lastSnappedElementIndex = activeElementIndex;
+
+        lastSnappedElementIndex =
+            activeElementIndex;
+
+
+        // --------------------------------------------------------
+        // Disable dragging
+        // --------------------------------------------------------
 
         canDrag = false;
         interactionLocked = true;
 
-        if (element.highlightObject != null)
-            element.highlightObject.SetActive(false);
 
-        // Overwrite the persistent controller with the new snapped transform for this page
+        // --------------------------------------------------------
+        // Hide highlight
+        // --------------------------------------------------------
+
+        if (element.highlightObject != null)
+        {
+            element.highlightObject.SetActive(false);
+        }
+
+
+        // ========================================================
+        // UPDATE PERSISTENT TRANSFORM
+        // ========================================================
+
         if (persistentAssetController != null)
         {
             persistentAssetController.UpdatePageTransform(
@@ -345,55 +711,135 @@ public class DraggableObject : MonoBehaviour
             );
         }
 
+
+        // ========================================================
+        // SNAP COMPLETED EVENT
+        // ========================================================
+
         element.OnSnapCompleted?.Invoke();
 
-        if (pageNavigationController != null && element.unlocknavigationOnSnap)
-            pageNavigationController.EnableNavigationButtons();
-    }
 
-    void StartReturn()
-    {
-        returning = true;
+        // ========================================================
+        // ENABLE NAVIGATION
+        // ========================================================
 
-        if (activeElementIndex >= 0)
+        if (pageNavigationController != null &&
+            element.unlocknavigationOnSnap)
         {
-            var element = elements[activeElementIndex];
-
-            if (element.highlightObject != null)
-                element.highlightObject.SetActive(false);
+            pageNavigationController.EnableNavigationButtons();
         }
     }
 
-    void ReturnToLastValidPosition()
-    {
-        Vector3 targetPos = currentStartPos;
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, returnSpeed * Time.deltaTime);
+    // ============================================================
+    // START RETURN
+    // ============================================================
+
+    private void StartReturn()
+    {
+        returning = true;
+
+
+        if (activeElementIndex >= 0)
+        {
+            SnapElement element =
+                elements[activeElementIndex];
+
+
+            if (element.highlightObject != null)
+            {
+                element.highlightObject.SetActive(false);
+            }
+        }
+    }
+
+
+    // ============================================================
+    // RETURN TO LAST VALID POSITION
+    // ============================================================
+
+    private void ReturnToLastValidPosition()
+    {
+        Vector3 targetPos =
+            currentStartPos;
+
+
+        // --------------------------------------------------------
+        // Position
+        // --------------------------------------------------------
+
+        transform.position =
+            Vector3.Lerp(
+                transform.position,
+                targetPos,
+                returnSpeed * Time.deltaTime
+            );
+
+
+        // --------------------------------------------------------
+        // Rotation
+        // --------------------------------------------------------
 
         if (snapRotation)
-            transform.rotation = Quaternion.Slerp(transform.rotation, currentStartRot, returnSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, targetPos) < snapDistance)
         {
-            transform.position = targetPos;
+            transform.rotation =
+                Quaternion.Slerp(
+                    transform.rotation,
+                    currentStartRot,
+                    returnSpeed * Time.deltaTime
+                );
+        }
+
+
+        // --------------------------------------------------------
+        // Return complete
+        // --------------------------------------------------------
+
+        if (Vector3.Distance(
+                transform.position,
+                targetPos
+            ) < snapDistance)
+        {
+            transform.position =
+                targetPos;
+
 
             if (snapRotation)
-                transform.rotation = currentStartRot;
+            {
+                transform.rotation =
+                    currentStartRot;
+            }
+
 
             returning = false;
+
             EnableAnimator();
         }
     }
 
-    void EnableAnimator()
+
+    // ============================================================
+    // ENABLE ANIMATOR
+    // ============================================================
+
+    private void EnableAnimator()
     {
-        if (animator != null && !animator.enabled)
+        if (animator != null &&
+            !animator.enabled)
+        {
             animator.enabled = true;
+        }
     }
 
-    Vector3 GetWorldPosition(Vector3 inputPos)
+
+    // ============================================================
+    // GET WORLD POSITION
+    // ============================================================
+
+    private Vector3 GetWorldPosition(Vector3 inputPos)
     {
         inputPos.z = objectScreenZ;
+
         return mainCam.ScreenToWorldPoint(inputPos);
     }
 }
