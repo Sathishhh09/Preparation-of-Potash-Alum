@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
+  m_Name: MCQ_004
+  m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
+  questionText: 'The cupula in the semicircular canal will be bent when a rotation
+    begins. This is because:'
+  referenceImage: {fileID: 0}
+  explanationText: When the semicircular canals in the inner ear experience angular
+    acceleration, the endolymph fluid inside the canals initially lags behind the
+    movement of the canal walls, causing the cupula (a sensory structure within the
+    canal) to bend. This bending stimulates hair cells and signals changes in rotational
+    movement.
+  options:
+  - The fluid (endolymph) within the semicircular canal lags behind the accelerated
+    canal walls
+  - The cupula will stay in place and give the correct impression
+  - The fluid (endolymph) will precede the accelerated canal walls
+  - The cupula will bend on constant angular speeds
+  correctOptionIndex: 0

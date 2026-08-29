@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
+  m_Name: MCQ_008
+  m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
+  questionText: What causes conductive deafness?
+  referenceImage: {fileID: 0}
+  explanationText: Conductive deafness occurs when there is a problem in the outer
+    or middle ear, typically due to damage to the ossicles (small bones) or the eardrum,
+    which prevents sound from being properly conducted to the inner ear.
+  options:
+  - Damage to the outer ear
+  - Damage to the pinna
+  - Damage to the ossicles or the eardrum
+  - Damage to the middle ear
+  correctOptionIndex: 2
