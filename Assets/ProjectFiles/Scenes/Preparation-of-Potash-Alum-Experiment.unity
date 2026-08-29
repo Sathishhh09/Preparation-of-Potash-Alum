@@ -11988,6 +11988,114 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367273424}
   m_Mesh: {fileID: -7193267189178589993, guid: 3c0cc8fdc7313174893c7a7f52425b57, type: 3}
+--- !u!1 &370101201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370101202}
+  - component: {fileID: 370101203}
+  m_Layer: 0
+  m_Name: ObjectClickManagerSlide1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &370101202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370101201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1403983597}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &370101203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370101201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a191b4ff5f95df4285af2a0156af26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectClickIdentificationManager
+  mainCamera: {fileID: 1147446644}
+  defaultCameraPoint: {fileID: 1194766314}
+  cameraMoveDuration: 1
+  cameraMovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  descriptionUI: {fileID: 705691154118978068}
+  titleText: {fileID: 9171403575077705826}
+  descriptionText: {fileID: 3535524133903609404}
+  backButton: {fileID: 8229714353075522028}
+  correctTargets:
+  - itemName: Al2(SO4)
+    clickableCollider: {fileID: 1007605921}
+    allowedPageIndex: 1
+    cameraPoint: {fileID: 0}
+    title: 
+    description: 
+  - itemName: K2SO4
+    clickableCollider: {fileID: 1303545504}
+    allowedPageIndex: 1
+    cameraPoint: {fileID: 0}
+    title: 
+    description: 
+  wrongTargets: []
+  audioSource: {fileID: 2122437354}
+  correctSound: {fileID: 8300000, guid: ddb9b58d2abd67c4e9b146671ce2eb77, type: 3}
+  wrongSound: {fileID: 8300000, guid: a762bb80a6ad8e44ba591816638bd09e, type: 3}
+  pageCanvasParents:
+  - pageIndex: 1
+    canvasParent: {fileID: 1753594518}
+  correctWorldSpacePrefab: {fileID: 5600128206876151123, guid: d0a5abc543e10044a9dd147a67111262, type: 3}
+  wrongWorldSpacePrefab: {fileID: 6772785400039989718, guid: 5fcff23078e445c4484a607dc130356c, type: 3}
+  yOffsetDistance: 0.05
+  spawnScaleMultiplier: {x: 0.005, y: 0.005, z: 0.005}
+  OnCorrectObjectClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWrongObjectClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllObjectsCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &372785588
 GameObject:
   m_ObjectHideFlags: 0
@@ -22634,7 +22742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 652681396}
   m_Layer: 5
-  m_Name: Slide2Spawn
+  m_Name: Slide3Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26305,18 +26413,6 @@ MonoBehaviour:
   descriptionText: {fileID: 3535524133903609404}
   backButton: {fileID: 8229714353075522028}
   correctTargets:
-  - itemName: AL2(SO4)3
-    clickableCollider: {fileID: 1007605921}
-    allowedPageIndex: 1
-    cameraPoint: {fileID: 0}
-    title: 
-    description: 
-  - itemName: K2SO4
-    clickableCollider: {fileID: 1303545504}
-    allowedPageIndex: 1
-    cameraPoint: {fileID: 0}
-    title: 
-    description: 
   - itemName: Alcohal Mixture
     clickableCollider: {fileID: 1519457803}
     allowedPageIndex: 2
@@ -26393,11 +26489,9 @@ MonoBehaviour:
   - wrongCollider: {fileID: 963212487}
     allowedPageIndex: 2
   audioSource: {fileID: 2122437354}
-  correctSound: {fileID: 0}
-  wrongSound: {fileID: 0}
+  correctSound: {fileID: 8300000, guid: ddb9b58d2abd67c4e9b146671ce2eb77, type: 3}
+  wrongSound: {fileID: 8300000, guid: a762bb80a6ad8e44ba591816638bd09e, type: 3}
   pageCanvasParents:
-  - pageIndex: 1
-    canvasParent: {fileID: 1753594518}
   - pageIndex: 2
     canvasParent: {fileID: 652681396}
   correctWorldSpacePrefab: {fileID: 5600128206876151123, guid: d0a5abc543e10044a9dd147a67111262, type: 3}
@@ -50437,6 +50531,7 @@ Transform:
   - {fileID: 2518091904344716394}
   - {fileID: 882184502}
   - {fileID: 1652702734}
+  - {fileID: 370101202}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411145235
@@ -64835,7 +64930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1753594518}
   m_Layer: 5
-  m_Name: Slide1Spawn
+  m_Name: Slide2Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
