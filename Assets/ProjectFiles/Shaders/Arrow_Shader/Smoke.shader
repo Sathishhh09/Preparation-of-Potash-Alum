@@ -71,11 +71,6 @@ Shader "Custom/ProceduralSmoke"
 
             CBUFFER_END
 
-
-            // ---------------------------------------------------------
-            // 2D HASH
-            // ---------------------------------------------------------
-
             float hash21(float2 p)
             {
                 p = frac(p * float2(123.34, 456.21));
@@ -84,11 +79,6 @@ Shader "Custom/ProceduralSmoke"
 
                 return frac(p.x * p.y);
             }
-
-
-            // ---------------------------------------------------------
-            // VALUE NOISE
-            // ---------------------------------------------------------
 
             float noise(float2 p)
             {
@@ -113,11 +103,6 @@ Shader "Custom/ProceduralSmoke"
                 );
             }
 
-
-            // ---------------------------------------------------------
-            // FRACTAL BROWNIAN MOTION
-            // ---------------------------------------------------------
-
             float fbm(float2 p)
             {
                 float value = 0.0;
@@ -136,161 +121,58 @@ Shader "Custom/ProceduralSmoke"
                 return value;
             }
 
-
-            // ---------------------------------------------------------
-            // VERTEX
-            // ---------------------------------------------------------
-
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
 
-                OUT.positionHCS =
-                    TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
 
                 OUT.uv = IN.uv;
 
                 return OUT;
             }
 
-
-            // ---------------------------------------------------------
-            // FRAGMENT
-            // ---------------------------------------------------------
-
             half4 frag(Varyings IN) : SV_Target
             {
                 float2 uv = IN.uv;
 
-
-                // -----------------------------------------------------
-                // TIME
-                // -----------------------------------------------------
-
                 float time = _Time.y * _NoiseSpeed;
-
-
-                // -----------------------------------------------------
-                // RISING MOTION
-                // -----------------------------------------------------
 
                 float2 smokeUV = uv;
 
                 smokeUV.y -= time;
 
+                float n1 = fbm(smokeUV * _NoiseScale);
 
-                // -----------------------------------------------------
-                // FIRST NOISE
-                // -----------------------------------------------------
-
-                float n1 = fbm(
-                    smokeUV * _NoiseScale
-                );
-
-
-                // -----------------------------------------------------
-                // DISTORTION NOISE
-                // -----------------------------------------------------
-
-                float2 distortionUV =
-                    uv * (_NoiseScale * 0.7);
+                float2 distortionUV = uv * (_NoiseScale * 0.7);
 
                 distortionUV.y -= time * 0.5;
 
 
-                float distortion =
-                    fbm(distortionUV);
+                float distortion = fbm(distortionUV);
 
 
-                smokeUV.x +=
-                    (distortion - 0.5) *
-                    _Distortion;
+                smokeUV.x += (distortion - 0.5) * _Distortion;
+
+                float smoke = fbm(smokeUV * _NoiseScale);
+
+                smoke = smoothstep(0.35,0.7,smoke);
+
+                float topFade = 1.0 - smoothstep(0.45,1.0,uv.y);
+
+                float bottomFade = smoothstep(0.0,0.15,uv.y);
 
 
-                // -----------------------------------------------------
-                // FINAL SMOKE NOISE
-                // -----------------------------------------------------
+                float sideDistance = abs(uv.x - 0.5) * 2.0;
 
-                float smoke =
-                    fbm(
-                        smokeUV * _NoiseScale
-                    );
+                float sideFade = 1.0 - smoothstep(0.5,1.0,sideDistance);
 
+                float alpha = smoke * topFade * bottomFade * sideFade * _Opacity;
 
-                // -----------------------------------------------------
-                // SMOOTH THE SMOKE
-                // -----------------------------------------------------
-
-                smoke = smoothstep(
-                    0.35,
-                    0.7,
-                    smoke
-                );
+                float3 finalColor = _Color.rgb;
 
 
-                // -----------------------------------------------------
-                // TOP FADE
-                // -----------------------------------------------------
-
-                float topFade =
-                    1.0 - smoothstep(
-                        0.45,
-                        1.0,
-                        uv.y
-                    );
-
-
-                // -----------------------------------------------------
-                // BOTTOM FADE
-                // -----------------------------------------------------
-
-                float bottomFade =
-                    smoothstep(
-                        0.0,
-                        0.15,
-                        uv.y
-                    );
-
-
-                // -----------------------------------------------------
-                // SIDE FADE
-                // -----------------------------------------------------
-
-                float sideDistance =
-                    abs(uv.x - 0.5) * 2.0;
-
-                float sideFade =
-                    1.0 - smoothstep(
-                        0.5,
-                        1.0,
-                        sideDistance
-                    );
-
-
-                // -----------------------------------------------------
-                // FINAL ALPHA
-                // -----------------------------------------------------
-
-                float alpha =
-                    smoke *
-                    topFade *
-                    bottomFade *
-                    sideFade *
-                    _Opacity;
-
-
-                // -----------------------------------------------------
-                // COLOR
-                // -----------------------------------------------------
-
-                float3 finalColor =
-                    _Color.rgb;
-
-
-                return half4(
-                    finalColor,
-                    alpha
-                );
+                return half4(finalColor,alpha);
             }
 
             ENDHLSL

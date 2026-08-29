@@ -27082,7 +27082,7 @@ Transform:
   - {fileID: 1730180224}
   - {fileID: 415961767}
   m_Father: {fileID: 1312148158}
-  m_LocalEulerAnglesHint: {x: 89.41583, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.24280553, y: 0.22251709, z: 42.50367}
 --- !u!1 &805234716
 GameObject:
   m_ObjectHideFlags: 0
@@ -45301,6 +45301,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1424187692}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   enableNavigation: 0
 --- !u!114 &1312148156
