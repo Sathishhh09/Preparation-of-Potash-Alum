@@ -7079,6 +7079,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PageAssetController
   allAssets: []
   pageAssets:
+  - pageIndex: 3
+    assets: []
+    onPageEntered:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8567907582446449515}
+          m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - pageIndex: 7
     assets: []
     onPageEntered:
@@ -7101,7 +7118,7 @@ MonoBehaviour:
     onPageEntered:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 495603405}
+        - m_Target: {fileID: 1051408501}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
@@ -27325,7 +27342,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774460448}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4e1f81991521ed4d82c776708bad02e, type: 3}
   m_Name: 
@@ -41865,13 +41882,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172965793}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9859413, z: 0.16709234, w: 0}
-  m_LocalPosition: {x: 0.707, y: 1.605, z: 4.963}
+  m_LocalRotation: {x: -0, y: -0.999983, z: 0.0058435933, w: 0}
+  m_LocalPosition: {x: 0.348, y: 1.172, z: 4.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 209284135}
-  m_LocalEulerAnglesHint: {x: 8.419, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.67, y: -180, z: 0}
 --- !u!1 &1173345520
 GameObject:
   m_ObjectHideFlags: 0
@@ -55781,10 +55798,6 @@ MonoBehaviour:
       stayInUpcomingPages: 0
       enableOnce: 0
       hasBeenEnabledOnce: 0
-    - panel: {fileID: 2000695134}
-      stayInUpcomingPages: 0
-      enableOnce: 0
-      hasBeenEnabledOnce: 0
   - pageName: Page 30
     pageText: 
     showDialogBox: 0
@@ -64869,7 +64882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558220eb812e5124cb8b5d4cc4ab3be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 2122437354}
 --- !u!1 &1746613518
 GameObject:
   m_ObjectHideFlags: 0
@@ -74556,13 +74569,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016145528}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.99730265, z: 0.07339948, w: 0}
-  m_LocalPosition: {x: 0.232, y: 1.489, z: 4.866}
+  m_LocalRotation: {x: -0, y: -0.9955307, z: -0.094439104, w: 0}
+  m_LocalPosition: {x: 0.262, y: 0.959, z: 4.687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 209284135}
-  m_LocalEulerAnglesHint: {x: 8.419, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.838, y: -180, z: 0}
 --- !u!1 &2017149796
 GameObject:
   m_ObjectHideFlags: 0
@@ -102712,6 +102725,18 @@ MonoBehaviour:
     onInvoked:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 2000695134}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
         - m_Target: {fileID: 1051408501}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
