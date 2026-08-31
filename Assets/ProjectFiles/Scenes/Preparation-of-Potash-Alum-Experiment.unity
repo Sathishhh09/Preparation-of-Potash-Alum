@@ -2237,22 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 61978179}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!1 &67421498
 GameObject:
   m_ObjectHideFlags: 0
@@ -11665,22 +11650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 357952118}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!95 &357952118
 Animator:
   serializedVersion: 7
@@ -12046,60 +12016,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 370101201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a191b4ff5f95df4285af2a0156af26e, type: 3}
+  m_Script: {fileID: 11500000, guid: c1011ab23d4cc5946b7bfb01ef87198d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectClickIdentificationManager
+  m_EditorClassIdentifier: Assembly-CSharp::ClickManager
   mainCamera: {fileID: 1147446644}
-  defaultCameraPoint: {fileID: 1194766314}
-  cameraMoveDuration: 1
-  cameraMovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  descriptionUI: {fileID: 705691154118978068}
-  titleText: {fileID: 9171403575077705826}
-  descriptionText: {fileID: 3535524133903609404}
-  backButton: {fileID: 8229714353075522028}
   correctTargets:
   - itemName: Al2(SO4)
     clickableCollider: {fileID: 1007605921}
-    allowedPageIndex: 1
-    cameraPoint: {fileID: 0}
-    title: 
-    description: 
+    allowedPageIndex: 2
   - itemName: K2SO4
     clickableCollider: {fileID: 1303545504}
-    allowedPageIndex: 1
-    cameraPoint: {fileID: 0}
-    title: 
-    description: 
+    allowedPageIndex: 2
   wrongTargets: []
   audioSource: {fileID: 2122437354}
   correctSound: {fileID: 8300000, guid: ddb9b58d2abd67c4e9b146671ce2eb77, type: 3}
   wrongSound: {fileID: 8300000, guid: a762bb80a6ad8e44ba591816638bd09e, type: 3}
-  pageCanvasParents:
-  - pageIndex: 1
-    canvasParent: {fileID: 1753594518}
+  pageCanvasParents: []
   correctWorldSpacePrefab: {fileID: 5600128206876151123, guid: d0a5abc543e10044a9dd147a67111262, type: 3}
   wrongWorldSpacePrefab: {fileID: 6772785400039989718, guid: 5fcff23078e445c4484a607dc130356c, type: 3}
   yOffsetDistance: 0.05
@@ -40162,34 +40094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1123012517}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1424187692}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!1 &1123260510
 GameObject:
   m_ObjectHideFlags: 0
@@ -42678,6 +42583,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1194766314}
+  - component: {fileID: 1194766316}
+  - component: {fileID: 1194766315}
   m_Layer: 0
   m_Name: Cam(2)
   m_TagString: Untagged
@@ -42693,13 +42600,108 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194766313}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.99480826, z: 0.10176738, w: 0}
-  m_LocalPosition: {x: 0.246, y: 1.482, z: 5.073}
+  m_LocalRotation: {x: -0, y: -0.999809, z: 0.019543378, w: 0}
+  m_LocalPosition: {x: 0.246, y: 1.121, z: 4.951}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 209284135}
-  m_LocalEulerAnglesHint: {x: 21.245, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.24, y: -180, z: 0}
+--- !u!114 &1194766315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194766313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
+--- !u!20 &1194766316
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194766313}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.1
+  far clip plane: 1000
+  field of view: 40
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1195524809
 GameObject:
   m_ObjectHideFlags: 0
@@ -47515,34 +47517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1312148154}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1424187692}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!114 &1312148156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50623,6 +50598,7 @@ Transform:
   - {fileID: 1652702734}
   - {fileID: 370101202}
   - {fileID: 1745322491}
+  - {fileID: 1560108863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411145235
@@ -58755,6 +58731,80 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560049463}
   m_Mesh: {fileID: -5053925668127403250, guid: 3c0cc8fdc7313174893c7a7f52425b57, type: 3}
+--- !u!1 &1560108862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560108863}
+  - component: {fileID: 1560108864}
+  m_Layer: 0
+  m_Name: SaltScaleContoller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1560108863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560108862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1403983597}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1560108864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560108862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3fdefb3950b6894ea4f005699023440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaltScale
+  scaleConfigs:
+  - targetPageIndex: 10
+    targetObject: {fileID: 5794343837532975410}
+    initialScale: {x: 0, y: 0, z: 0}
+    targetScale: {x: 0.5, y: 0.5, z: 0.5}
+    duration: 1
+    easeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!1 &1564955075
 GameObject:
   m_ObjectHideFlags: 0
@@ -66590,7 +66640,7 @@ MonoBehaviour:
       autoHighlightOnPageEnter: 1
   - pageIndex: 21
     meshEntries:
-    - targetObject: {fileID: 7719354365329106932}
+    - targetObject: {fileID: 2240371130786543007}
       autoHighlightOnPageEnter: 1
   - pageIndex: 23
     meshEntries:
@@ -69338,22 +69388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1858492030}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!1 &1859676542
 GameObject:
   m_ObjectHideFlags: 0
@@ -73773,22 +73808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1990569324}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!114 &1990569322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85578,7 +85598,7 @@ Transform:
   m_Children:
   - {fileID: 5870436397542421055}
   m_Father: {fileID: 543450652186804482}
-  m_LocalEulerAnglesHint: {x: -17.000006, y: 64.00001, z: -0.000001785568}
+  m_LocalEulerAnglesHint: {x: -17.000004, y: 64.00001, z: -0.0000013513992}
 --- !u!224 &1137241087294976096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -101358,22 +101378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3935650572207870471}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!224 &3936816468386887639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -111568,7 +111573,7 @@ Transform:
   - {fileID: 7248775262887647147}
   - {fileID: 7297289347395018544}
   m_Father: {fileID: 1125492479629741168}
-  m_LocalEulerAnglesHint: {x: 4.2583284, y: 24.08103, z: -0.08909746}
+  m_LocalEulerAnglesHint: {x: -32.17016, y: 18.584538, z: 2.2637908}
 --- !u!23 &5870955164345393923
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -116599,22 +116604,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6717587149563921676}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents:
+  - eventName: Animator off
+    onTriggered:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6717587149563921676}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    enableNavigation: 0
+  - eventName: page 11 scale object
+    onTriggered:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PageScaleController, Assembly-CSharp
+          m_MethodName: StartPageScale
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    enableNavigation: 0
+  - eventName: page 12 scale object
+    onTriggered:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PageScaleController, Assembly-CSharp
+          m_MethodName: StartPageScale
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 11
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    enableNavigation: 0
 --- !u!33 &6721801054749632000
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -118484,22 +118525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7051356463443347049}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!65 &7051356463443347051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119328,7 +119354,7 @@ Transform:
   m_Children:
   - {fileID: 4546278202505802390}
   m_Father: {fileID: 5870436397542421055}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -3.6390724, y: -0.43994665, z: 0.16606696}
 --- !u!1 &7250937802924859287
 GameObject:
   m_ObjectHideFlags: 0
@@ -119632,7 +119658,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5870436397542421055}
-  m_LocalEulerAnglesHint: {x: 0.000000026680421, y: -0.00000010672169, z: -0.000000025846658}
+  m_LocalEulerAnglesHint: {x: 0.00000002019296, y: -0.00000008077184, z: -0.00000001956193}
 --- !u!1 &7298926384015957567
 GameObject:
   m_ObjectHideFlags: 0
@@ -124487,22 +124513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8002211386362886621}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!222 &8006683667627759884
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -127919,7 +127930,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.9604643e-10, y: 0, z: 0.0002194345}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2758748116956657492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131662,22 +131673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3803d3b77ac3c3f4dacccf20d381a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEventTrigger
-  onTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9217112574627124293}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableNavigation: 0
+  triggerEvents: []
 --- !u!4 &9222521594600453976
 Transform:
   m_ObjectHideFlags: 0
