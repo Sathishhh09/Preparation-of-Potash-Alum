@@ -41,12 +41,13 @@ public class SaltScale : MonoBehaviour
     private void OnDisable()
     {
         PageNavigationController.OnPageChanged -= HandlePageChanged;
+        StopAllCoroutines();
+        activeCoroutines.Clear();
     }
 
-    private IEnumerator Start()
+    private void Start()
     {
-        // Wait until end of frame to ensure PageNavigationController.CurrentIndex is fully initialized
-        yield return new WaitForEndOfFrame();
+        // Evaluate initial page state directly without yield delay spikes
         HandlePageChanged(PageNavigationController.CurrentIndex);
     }
 
@@ -63,14 +64,18 @@ public class SaltScale : MonoBehaviour
 
     public void TriggerScale(PageScaleConfig config)
     {
+        if (config.targetObject == null) return;
+
+        // Stop existing animation on this object if running
         if (activeCoroutines.TryGetValue(config.targetObject, out Coroutine existingCoroutine) && existingCoroutine != null)
         {
             StopCoroutine(existingCoroutine);
         }
 
-        // Force scale to initial scale IMMEDIATELY when entering the page
+        // Apply initial scale immediately
         config.targetObject.transform.localScale = config.initialScale;
 
+        // Start new scale routine
         Coroutine newCoroutine = StartCoroutine(AnimateScaleRoutine(config));
         activeCoroutines[config.targetObject] = newCoroutine;
     }
@@ -84,18 +89,22 @@ public class SaltScale : MonoBehaviour
         if (config.duration <= 0f)
         {
             targetTransform.localScale = config.targetScale;
+            activeCoroutines.Remove(config.targetObject);
             yield break;
         }
 
+        // Ensure object starts explicitly at startScale on frame 0
+        targetTransform.localScale = startScale;
+
         while (elapsedTime < config.duration)
         {
+            yield return null; // Yield FIRST so Time.deltaTime reflects actual frame elapsed time
+
             elapsedTime += Time.deltaTime;
             float normalizedTime = Mathf.Clamp01(elapsedTime / config.duration);
             
             float curveValue = config.easeCurve.Evaluate(normalizedTime);
             targetTransform.localScale = Vector3.LerpUnclamped(startScale, config.targetScale, curveValue);
-
-            yield return null;
         }
 
         targetTransform.localScale = config.targetScale;
