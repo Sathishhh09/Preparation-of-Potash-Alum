@@ -26444,73 +26444,73 @@ MonoBehaviour:
     clickableCollider: {fileID: 1519457803}
     allowedPageIndex: 2
     cameraPoint: {fileID: 392001685}
-    title: 
+    title: Alcohal Mixture
     description: 
   - itemName: Dilute Sulphuric Acid
     clickableCollider: {fileID: 1238883914}
     allowedPageIndex: 2
     cameraPoint: {fileID: 1175780286}
-    title: 
+    title: Dilute Sulphuric Acid
     description: 
   - itemName: Distilled Water
     clickableCollider: {fileID: 1788869838}
     allowedPageIndex: 2
     cameraPoint: {fileID: 502661232}
-    title: 
+    title: Distilled Water
     description: 
   - itemName: Beaker
     clickableCollider: {fileID: 1018337818}
     allowedPageIndex: 2
     cameraPoint: {fileID: 335304335}
-    title: 
+    title: Beaker
     description: 
   - itemName: Watch Glass
     clickableCollider: {fileID: 777809800}
     allowedPageIndex: 2
     cameraPoint: {fileID: 223615378}
-    title: 
+    title: Watch Glass
     description: 
   - itemName: Filteration Stand
     clickableCollider: {fileID: 1855674666}
     allowedPageIndex: 2
     cameraPoint: {fileID: 1856936907}
-    title: 
+    title: Filteration Stand
     description: 
   - itemName: Trough
     clickableCollider: {fileID: 1627350848}
     allowedPageIndex: 2
     cameraPoint: {fileID: 2030442106}
-    title: 
+    title: Trough
     description: 
   - itemName: Tripod Stand
     clickableCollider: {fileID: 2063031749}
     allowedPageIndex: 2
     cameraPoint: {fileID: 110874372}
-    title: 
+    title: Tripod Stand
     description: 
   - itemName: Crystallising Dish
     clickableCollider: {fileID: 335968592}
     allowedPageIndex: 2
     cameraPoint: {fileID: 1727167695}
-    title: 
+    title: Crystallising Dish
     description: 
   - itemName: Spatula
     clickableCollider: {fileID: 1548323831}
     allowedPageIndex: 2
     cameraPoint: {fileID: 1123260511}
-    title: 
+    title: Spatula
     description: 
   - itemName: Glass Rod
     clickableCollider: {fileID: 1827177555}
     allowedPageIndex: 2
     cameraPoint: {fileID: 2086364854}
-    title: 
+    title: Glass Rod
     description: 
   - itemName: Wire Gauze
     clickableCollider: {fileID: 1234105685}
     allowedPageIndex: 2
     cameraPoint: {fileID: 1847922315}
-    title: 
+    title: Wire Gauze
     description: 
   wrongTargets:
   - wrongCollider: {fileID: 963212487}
@@ -48892,6 +48892,7 @@ RectTransform:
   - {fileID: 1260468370541054021}
   - {fileID: 1753594518}
   - {fileID: 652681396}
+  - {fileID: 1541302760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -57968,6 +57969,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541001706}
   m_Mesh: {fileID: -1845931679895651543, guid: 3c0cc8fdc7313174893c7a7f52425b57, type: 3}
+--- !u!1 &1541302759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541302760}
+  m_Layer: 5
+  m_Name: Slide4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1541302760
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541302759}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1353238464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1545868906
 GameObject:
   m_ObjectHideFlags: 0
