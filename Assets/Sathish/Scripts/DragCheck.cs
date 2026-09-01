@@ -13,81 +13,49 @@ public class DragCheck : MonoBehaviour
     [Header("Events")]
     public UnityEvent onDragCompleted;
 
+    private DragAndDropManager manager;
+
+    private void Awake()
+    {
+        manager = FindObjectOfType<DragAndDropManager>();
+
+        if (manager == null)
+        {
+            Debug.LogError("DragAndDropManager not found in scene!");
+        }
+    }
 
     public void CheckItem(UIDrag draggedItem)
     {
         if (draggedItem == null)
         {
-            Debug.LogWarning("Dragged item is null.");
             return;
         }
 
-        Debug.Log(
-            "Checking Item: " +
-            draggedItem.ItemID +
-            " against " +
-            itemID
-        );
-
-
-        // ============================================================
-        // CORRECT ITEM
-        // ============================================================
-
         if (draggedItem.ItemID == itemID)
         {
-            Debug.Log("CORRECT ITEM DROPPED!");
-
-
-            // --------------------------------------------------------
-            // Set text on World Space UI
-            // --------------------------------------------------------
-
             if (targetText != null)
             {
                 targetText.text = draggedItem.ItemID;
-
-                Debug.Log(
-                    "World Space Text Changed To: " +
-                    draggedItem.ItemID
-                );
             }
-            else
-            {
-                Debug.LogWarning(
-                    "Target Text is not assigned on " +
-                    gameObject.name
-                );
-            }
-
-
-            // --------------------------------------------------------
-            // Hide dragged screen-space item
-            // --------------------------------------------------------
 
             draggedItem.gameObject.SetActive(false);
 
-
-            // --------------------------------------------------------
-            // Event
-            // --------------------------------------------------------
-
             onDragCompleted?.Invoke();
+
+            if (manager != null)
+            {
+                manager.RegisterCompleted(this);
+            }
+            else
+            {
+                Debug.LogError("DragAndDropManager is NULL!");
+            }
         }
-
-
-        // ============================================================
-        // INCORRECT ITEM
-        // ============================================================
 
         else
         {
-            Debug.Log(
-                "INCORRECT ITEM. Expected: " +
-                itemID +
-                " | Received: " +
-                draggedItem.ItemID
-            );
+            Debug.Log("INCORRECT ITEM. Expected: " +itemID +" | Received: " +draggedItem.ItemID);
         }
     }
 }
