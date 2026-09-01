@@ -11596,7 +11596,19 @@ MonoBehaviour:
   - eventName: 
     onTriggered:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 357952118}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     enableNavigation: 1
 --- !u!95 &357952118
 Animator:
@@ -14777,8 +14789,8 @@ MonoBehaviour:
   pageNumberText: {fileID: 667404828}
   developerIndexMode: 0
   testing: 0
-  requiresInteraction: 0001000100010101010001010100010001010100010100010101000101010101010000010101000000010001010101010000
-  lockNavigationTillUnlocked: 0000000000000000010001010100000001010100000100010101000000010001000000010000000000010001010101010000
+  requiresInteraction: 0001010100010101010001010100010001010100010100010101000101010101010000010101000100010001010101010000
+  lockNavigationTillUnlocked: 0000000100000000010001010100000001010100000100010101000000010001000000010000000000010001010101010000
   currentIndex: 0
 --- !u!4 &448350224
 Transform:
@@ -25698,8 +25710,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738117405}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.98105204, z: 0.19374436, w: 0}
-  m_LocalPosition: {x: 0.46, y: 2.27, z: 6.42}
+  m_LocalRotation: {x: 0, y: -0.9983499, z: 0.057424314, w: 0}
+  m_LocalPosition: {x: 0.46, y: 1.7511702, z: 5.802671}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27647,8 +27659,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787515889}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.98105204, z: 0.19374436, w: 0}
-  m_LocalPosition: {x: 0.365, y: 2.052, z: 5.653}
+  m_LocalRotation: {x: 0, y: -0.9810521, z: 0.19374438, w: 0}
+  m_LocalPosition: {x: 0.365, y: 1.8891201, z: 4.961498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37688,6 +37700,30 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1791664091}
+          m_TargetAssemblyTypeName: PageMeshHighlightManager, Assembly-CSharp
+          m_MethodName: DisableElement0ByPageIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 39
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 448350223}
+          m_TargetAssemblyTypeName: PageNavigationController, Assembly-CSharp
+          m_MethodName: EnableNavigationButtons
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 39
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -49379,7 +49415,19 @@ MonoBehaviour:
   - eventName: 
     onTriggered:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1364431635}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     enableNavigation: 1
 --- !u!1 &1364645364
 GameObject:
@@ -56201,6 +56249,10 @@ MonoBehaviour:
       enableOnce: 0
       hasBeenEnabledOnce: 0
     - panel: {fileID: 67421498}
+      stayInUpcomingPages: 0
+      enableOnce: 0
+      hasBeenEnabledOnce: 0
+    - panel: {fileID: 907289187}
       stayInUpcomingPages: 0
       enableOnce: 0
       hasBeenEnabledOnce: 0
@@ -66878,6 +66930,10 @@ MonoBehaviour:
     meshEntries:
     - targetObject: {fileID: 484488450}
       autoHighlightOnPageEnter: 1
+  - pageIndex: 39
+    meshEntries:
+    - targetObject: {fileID: 1064498346}
+      autoHighlightOnPageEnter: 1
   - pageIndex: 41
     meshEntries:
     - targetObject: {fileID: 1385551657}
@@ -69541,7 +69597,19 @@ MonoBehaviour:
   - eventName: 
     onTriggered:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1858492030}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     enableNavigation: 1
 --- !u!1 &1859676542
 GameObject:
@@ -71436,8 +71504,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896414827}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.96592593, z: 0, w: -0.25881898}
-  m_LocalPosition: {x: -0.065999985, y: 1.176, z: 4.65}
+  m_LocalRotation: {x: 0, y: -0.9994792, z: -0.032269202, w: 0}
+  m_LocalPosition: {x: 0.5603, y: 1.2599808, z: 5.1328487}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86176,7 +86244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the crystallising dish towards the beaker to remove the mother liquor.
+  m_text: Click the crystallising dish towards the beaker to remove the mother liquor.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
   m_sharedMaterial: {fileID: -8232536831469020223, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
@@ -101647,13 +101715,13 @@ MonoBehaviour:
     onTriggered:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 0
+        - m_Target: {fileID: 3935650572207870471}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -106095,7 +106163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the crystallising dish into the trough filled with water.
+  m_text: Click the crystallising dish into the trough filled with water.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
   m_sharedMaterial: {fileID: -8232536831469020223, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
@@ -114356,7 +114424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the watch glass to cover the crystallising dish.
+  m_text: Click the watch glass to cover the crystallising dish.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
   m_sharedMaterial: {fileID: -8232536831469020223, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
@@ -129221,7 +129289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the spatula towards the crystallising dish to transfer the crystals
+  m_text: Click the spatula towards the crystallising dish to transfer the crystals
     to the filter paper.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
@@ -131307,7 +131375,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the china dish to pour its contents into the crystallising dish.
+  m_text: Click the china dish to pour its contents into the crystallising dish.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
   m_sharedMaterial: {fileID: -8232536831469020223, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
@@ -131766,8 +131834,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the bottle containing mixture of water and ethanol (1:1) towards the
-    cystallising dish containing the crystals.
+  m_text: Click the bottle containing mixture of water and ethanol (1:1) towards
+    the cystallising dish containing the crystals.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
   m_sharedMaterial: {fileID: -8232536831469020223, guid: 356b1ee212a194b49bed1adb63017c1b, type: 2}
@@ -132146,7 +132214,19 @@ MonoBehaviour:
   - eventName: 
     onTriggered:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 9217112574627124293}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     enableNavigation: 1
 --- !u!4 &9222521594600453976
 Transform:
