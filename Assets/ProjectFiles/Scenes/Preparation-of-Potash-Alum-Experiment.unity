@@ -14788,7 +14788,7 @@ MonoBehaviour:
   previousButton: {fileID: 667404826}
   pageNumberText: {fileID: 667404828}
   developerIndexMode: 0
-  testing: 0
+  testing: 1
   requiresInteraction: 0001010100010101010001010100010001010100010100010101000101010101010000010101000100010001010101010000
   lockNavigationTillUnlocked: 0000000100000000010001010100000001010100000100010101000000010001000000010000000000010001010101010000
   currentIndex: 0
@@ -31060,6 +31060,20 @@ MonoBehaviour:
     suffix: g
     resetToZero: 0
     unlockNavigationOnComplete: 1
+  - pageIndex: 13
+    targetValue: 0
+    duration: 0.5
+    decimalPlaces: 4
+    suffix: g
+    resetToZero: 1
+    unlockNavigationOnComplete: 1
+  - pageIndex: 14
+    targetValue: 0
+    duration: 0.5
+    decimalPlaces: 4
+    suffix: g
+    resetToZero: 1
+    unlockNavigationOnComplete: 1
   - pageIndex: 15
     targetValue: 0
     duration: 0.5
@@ -31072,7 +31086,7 @@ MonoBehaviour:
     duration: 0.5
     decimalPlaces: 4
     suffix: g
-    resetToZero: 0
+    resetToZero: 1
     unlockNavigationOnComplete: 1
   - pageIndex: 17
     targetValue: 3.35
@@ -63675,7 +63689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1703633687
 Transform:
   m_ObjectHideFlags: 0
