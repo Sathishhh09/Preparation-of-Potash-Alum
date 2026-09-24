@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
-  m_Name: MCQ_009
+  m_Name: MCQ_011
   m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
-  questionText: The threshold is displaced 300 m down the runway. Which declared
-    distance changes?
+  questionText: How far from the runway centreline is the holding position for a
+    precision CAT II runway, code 4?
   referenceImage: {fileID: 0}
-  explanationText: Only LDA. The pavement before the new threshold can still be used
-    for take-off.
+  explanationText: 90 m for precision CAT I, II and III on code 3 and 4 runways.
+    For code F that figure becomes 107.5 m.
   options:
-  - TORA and LDA
-  - LDA only
-  - TODA only
-  - ASDA and LDA
+  - 75 m
+  - 90 m
+  - 60 m
+  - 107.5 m
   correctOptionIndex: 1

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d01fd2d64a9249049aaa77d5c12a82fe, type: 3}
-  m_Name: MCQ_009
+  m_Name: MCQ_012
   m_EditorClassIdentifier: Assembly-CSharp::MCQQuestionData
-  questionText: The threshold is displaced 300 m down the runway. Which declared
-    distance changes?
+  questionText: What is the only type of fixed object normally permitted inside a
+    runway strip?
   referenceImage: {fileID: 0}
-  explanationText: Only LDA. The pavement before the new threshold can still be used
-    for take-off.
+  explanationText: Visual aids are the exception, and they must be frangible. Everything
+    else inside the stated dimensions is an obstacle.
   options:
-  - TORA and LDA
-  - LDA only
-  - TODA only
-  - ASDA and LDA
+  - Boundary fencing
+  - Visual aids such as PAPIs, and they must be frangible
+  - Maintenance vehicles
+  - ILS localiser aerials
   correctOptionIndex: 1
